@@ -54,9 +54,9 @@ public class Bola extends JLabel implements ActionListener {
             if(this.getX()>=840){
                 velocidadx=-2;
             }
-            // if (this.getY() >= 880 && this.getX() >= p.barra.getX() && this.getX() <= (p.barra.getX() + 130)) {
-            //     velocidady = -4;
-            // }
+            if (this.getY() >= 880 && this.getX() >= p.barra.getX() && this.getX() <= (p.barra.getX() + 130)) {
+                velocidady = -4;
+            }
 
         }
     }
