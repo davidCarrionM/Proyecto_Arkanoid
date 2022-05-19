@@ -15,7 +15,7 @@ public class Bola extends JLabel implements ActionListener {
     Principal p;
 
     Bola(Principal p) {
-        timerBola = new Timer(17, this);
+        timerBola = new Timer(16, this);
         timerBola.start();
         this.p = p;
     }
@@ -50,6 +50,9 @@ public class Bola extends JLabel implements ActionListener {
             }
             if(this.getX()<=150){
                 velocidadx=+2;
+            }
+            if(this.getX()>=840){
+                velocidadx=-2;
             }
             // if (this.getY() >= 880 && this.getX() >= p.barra.getX() && this.getX() <= (p.barra.getX() + 130)) {
             //     velocidady = -4;
