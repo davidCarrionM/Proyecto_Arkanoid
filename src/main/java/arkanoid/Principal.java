@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,22 +11,26 @@ import javax.swing.JLabel;
 
 public class Principal extends JFrame {
     JLabel lblFondo;
-    JLabel lblScore;
-    JLabel lblHighScore;
+    NumPuntuacion[] auxScore = new NumPuntuacion[6];
+    Score score;
+    HighScore highScore;
     Barra barra;
     Barrera barrera;
     Ladrillo ladrillo;
     Bola bola;
+    NumPuntuacion numPuntuacion;
+    int puntuacion;
 
     Principal() {
         super("Arkanoid");
         setLayout(null);
+        
         getContentPane().setBackground(Color.BLACK);
 
         getContentPane().setFocusable(true);
         getContentPane().addKeyListener(new movimientoKey());
         int cont = 0;
-
+        int puntuacion = 0;
         barra = new Barra(this);
         barra.setSize(130, 25);
         barra.setLocation(430, 900);
@@ -42,20 +45,30 @@ public class Principal extends JFrame {
             this.add(barrera);
             x1 += 60;
         }
+        int x2 = 305;
+        int y2 = 95;
+        for (int i = 0; i < 6; i++) {
+            numPuntuacion = new NumPuntuacion(this);
+            numPuntuacion.setSize(16,20);
+            numPuntuacion.setLocation(x2,y2);
+            auxScore[i]=numPuntuacion;
+            add(numPuntuacion);
+            x2 += 20;
+        }
 
-        int x = 156;
+        int x = 144;
         int y = 250;
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 88; i++) {
             ladrillo = new Ladrillo(this,cont);
             ladrillo.setSize(63, 25);
             ladrillo.setLocation(x, y);
             this.add(ladrillo);
-            if ((i + 1) % 10 == 0) {
-                x = 156;
-                y += 35;
+            if ((i + 1) % 11 == 0) {
+                x = 144;
+                y += 26;
                 cont++;
             } else {
-                x += 68;
+                x += 64;
             }
         }
         bola = new Bola(this);
@@ -64,19 +77,15 @@ public class Principal extends JFrame {
         // bola.setLocation(490, 200);
         add(bola);
 
-        lblScore = new JLabel("Score");
-        lblScore.setSize(200, 70);
-        lblScore.setLocation(250, 40);
-        lblScore.setOpaque(true);
-        lblScore.setBackground(Color.WHITE);
-        add(lblScore);
+        score = new Score(this);
+        score.setSize(200, 70);
+        score.setLocation(250, 40);
+        add(score);
 
-        lblHighScore = new JLabel("High Score");
-        lblHighScore.setSize(270, 100);
-        lblHighScore.setLocation(480, 30);
-        lblHighScore.setOpaque(true);
-        lblHighScore.setBackground(Color.WHITE);
-        add(lblHighScore);
+        highScore = new HighScore(this);
+        highScore.setSize(270, 100);
+        highScore.setLocation(480, 30);
+        add(highScore);
 
         ImageIcon imagen = new ImageIcon(Principal.class.getResource("/arkanoid/img/fondoJugable.png"));
         Image conversion = imagen.getImage();
@@ -96,28 +105,26 @@ public class Principal extends JFrame {
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-                if (bola.flagEmpezar) {
-                    if (barra.getX() - 10 >= 150) {
-                        barra.setLocation(barra.getX() - 10, barra.getY());
-                    }
-                } else {
-                    if (barra.getX() - 10 >= 150) {
-                        barra.setLocation(barra.getX() - 10, barra.getY());
-                        bola.setLocation(bola.getX() - 10, bola.getY());
-                    }
-                }
+                barra.flagBarraIzquierda = true;
+
             }
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                if (bola.flagEmpezar) {
-                    if (barra.getX() + 10 <= 710) {
-                        barra.setLocation(barra.getX() + 10, barra.getY());
-                    }
-                } else {
-                    if (barra.getX() + 10 <= 710) {
-                        barra.setLocation(barra.getX() + 10, barra.getY());
-                        bola.setLocation(bola.getX() + 10, bola.getY());
-                    }
-                }
+
+                barra.flagBarraDerecha = true;
+
+            }
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
+                barra.flagBarraIzquierda = false;
+
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
+                barra.flagBarraDerecha = false;
+
             }
 
             if (e.getKeyCode() == KeyEvent.VK_SPACE && bola.flagEmpezar == false) {
@@ -131,6 +138,9 @@ public class Principal extends JFrame {
                     } else {
                         bola.flagEmpezar = true;
                         bola.velocidadx = (int) (Math.random() * 5 - 2);
+                        while(bola.velocidadx==0){
+                            bola.velocidadx = (int) (Math.random() * 5 - 2);
+                        }
                     }
                 }
 
