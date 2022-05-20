@@ -32,17 +32,18 @@ public class Bola extends JLabel implements ActionListener {
     }
 
     public void eliminar(Component objeto) {
-        objeto.setVisible(false);
-        p.remove(objeto);
+        // objeto.setVisible(false);
+        // p.remove(objeto);
+        ((Ladrillo)objeto).animacion = true;
         p.puntuacion += 10;
         contEliminar++;
-        for(int i = 0; i<p.auxScore.length;i++){
-        ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num"+(String.format("%06d", p.puntuacion).charAt(i)+".png")));
-        Image conversion1 = imagen1.getImage();
-            Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-            ImageIcon imgPre1 = new ImageIcon(tamaño1);
-            p.auxScore[i].setIcon(imgPre1);
-        }
+        // for(int i = 0; i<p.auxScore.length;i++){
+        // ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num"+(String.format("%06d", p.puntuacion).charAt(i)+".png")));
+        // Image conversion1 = imagen1.getImage();
+        //     Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+        //     ImageIcon imgPre1 = new ImageIcon(tamaño1);
+        //     p.auxScore[i].setIcon(imgPre1);
+        // }
     }
 
     @Override

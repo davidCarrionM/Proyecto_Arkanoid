@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -12,6 +13,7 @@ public class Ladrillo extends JLabel implements ActionListener {
     boolean animacion = false;
     Timer timerAnimacion;
     int contaux = 0;
+    
     Principal p;
 
     Ladrillo(Principal p, int index) {
@@ -20,24 +22,25 @@ public class Ladrillo extends JLabel implements ActionListener {
         Image tamaño = conversion.getScaledInstance(63, 25, Image.SCALE_SMOOTH);
         ImageIcon imgPre = new ImageIcon(tamaño);
         this.setIcon(imgPre);
-        timerAnimacion = new Timer(100, this);
-        timerAnimacion.start();
         this.p = p;
+        
+        timerAnimacion = new Timer(25, this);
+        timerAnimacion.start();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         if (e.getSource() == timerAnimacion && animacion) {
-            ImageIcon imagen = new ImageIcon(Ladrillo.class.getResource("/arkanoid/img/explosion" + 3 + ".png"));
-            Image conversion = imagen.getImage();
-            Image tamaño = conversion.getScaledInstance(63, 25, Image.SCALE_SMOOTH);
-            ImageIcon imgPre = new ImageIcon(tamaño);
-            this.setIcon(imgPre);
-            if (contaux == 12) {
-                animacion = false;
+            if (contaux == 7) {
                 this.setVisible(false);
+                animacion = false;
                 p.remove(this);
+                p.powerUp.XLadrillo = this.getX();
+                p.powerUp.YLadrillo = this.getY();
+                p.powerUp.gestionar();
+            }else{
+                this.setIcon(p.auxExplosion[contaux]);
+                contaux++;
             }
         }
 

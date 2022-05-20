@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,14 +18,17 @@ public class Principal extends JFrame {
     Barra barra;
     Barrera barrera;
     Ladrillo ladrillo;
+    Low low;
+    PowerUp powerUp;
     Bola bola;
     NumPuntuacion numPuntuacion;
     int puntuacion;
+    Icon[] auxExplosion = new Icon[8];
 
     Principal() {
         super("Arkanoid");
         setLayout(null);
-        
+
         getContentPane().setBackground(Color.BLACK);
 
         getContentPane().setFocusable(true);
@@ -45,13 +49,19 @@ public class Principal extends JFrame {
             this.add(barrera);
             x1 += 60;
         }
+
+        powerUp = new PowerUp(this);
+        add(powerUp);
+
+        
+
         int x2 = 305;
         int y2 = 95;
         for (int i = 0; i < 6; i++) {
             numPuntuacion = new NumPuntuacion(this);
-            numPuntuacion.setSize(16,20);
-            numPuntuacion.setLocation(x2,y2);
-            auxScore[i]=numPuntuacion;
+            numPuntuacion.setSize(16, 20);
+            numPuntuacion.setLocation(x2, y2);
+            auxScore[i] = numPuntuacion;
             add(numPuntuacion);
             x2 += 20;
         }
@@ -59,7 +69,7 @@ public class Principal extends JFrame {
         int x = 144;
         int y = 250;
         for (int i = 0; i < 88; i++) {
-            ladrillo = new Ladrillo(this,cont);
+            ladrillo = new Ladrillo(this, cont);
             ladrillo.setSize(63, 25);
             ladrillo.setLocation(x, y);
             this.add(ladrillo);
@@ -97,6 +107,14 @@ public class Principal extends JFrame {
         lblFondo.setIcon(imgPre);
         add(lblFondo);
 
+        for (int i = 0; i < 8; i++) {
+            ImageIcon imagen1 = new ImageIcon(Ladrillo.class.getResource("/arkanoid/img/explosion" + i + ".png"));
+            Image conversion1 = imagen1.getImage();
+            Image tamaño1 = conversion1.getScaledInstance(50, 25, Image.SCALE_SMOOTH);
+            ImageIcon imgPre1 = new ImageIcon(tamaño1);
+            auxExplosion[i] = imgPre1;
+        }
+
     }
 
     public class movimientoKey extends KeyAdapter {
@@ -114,6 +132,7 @@ public class Principal extends JFrame {
 
             }
         }
+
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -138,7 +157,7 @@ public class Principal extends JFrame {
                     } else {
                         bola.flagEmpezar = true;
                         bola.velocidadx = (int) (Math.random() * 5 - 2);
-                        while(bola.velocidadx==0){
+                        while (bola.velocidadx == 0) {
                             bola.velocidadx = (int) (Math.random() * 5 - 2);
                         }
                     }
