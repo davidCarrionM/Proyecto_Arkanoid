@@ -24,7 +24,7 @@ public class Ladrillo extends JLabel implements ActionListener {
         this.setIcon(imgPre);
         this.p = p;
         
-        timerAnimacion = new Timer(25, this);
+        timerAnimacion = new Timer(40, this);
         timerAnimacion.start();
     }
 

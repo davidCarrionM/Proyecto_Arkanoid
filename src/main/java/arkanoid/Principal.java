@@ -18,7 +18,6 @@ public class Principal extends JFrame {
     Barra barra;
     Barrera barrera;
     Ladrillo ladrillo;
-    Low low;
     PowerUp powerUp;
     Bola bola;
     NumPuntuacion numPuntuacion;
@@ -39,6 +38,7 @@ public class Principal extends JFrame {
         barra.setSize(130, 25);
         barra.setLocation(430, 900);
         add(barra);
+
 
         int x1 = 170;
         int y1 = 940;
@@ -114,6 +114,10 @@ public class Principal extends JFrame {
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxExplosion[i] = imgPre1;
         }
+
+    }
+
+    void crearPower(){
 
     }
 
