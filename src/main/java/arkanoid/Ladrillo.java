@@ -13,7 +13,6 @@ public class Ladrillo extends JLabel implements ActionListener {
     boolean animacion = false;
     Timer timerAnimacion;
     int contaux = 0;
-    
     Principal p;
 
     Ladrillo(Principal p, int index) {
@@ -24,6 +23,7 @@ public class Ladrillo extends JLabel implements ActionListener {
         this.setIcon(imgPre);
         this.p = p;
         
+
         timerAnimacion = new Timer(40, this);
         timerAnimacion.start();
     }
@@ -32,12 +32,12 @@ public class Ladrillo extends JLabel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == timerAnimacion && animacion) {
             if (contaux == 7) {
-                this.setVisible(false);
                 animacion = false;
-                p.remove(this);
                 p.powerUp.XLadrillo = this.getX();
                 p.powerUp.YLadrillo = this.getY();
                 p.powerUp.gestionar();
+                this.setVisible(false);
+                p.remove(this);
             }else{
                 this.setIcon(p.auxExplosion[contaux]);
                 contaux++;

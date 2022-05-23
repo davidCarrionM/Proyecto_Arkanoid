@@ -12,8 +12,7 @@ public class PowerUp extends JLabel {
     Low low;
 
     PowerUp(Principal p){
-    this.p = p;
-
+        this.p = p;
     }
 
     public void gestionar(){
@@ -23,10 +22,15 @@ public class PowerUp extends JLabel {
             System.out.println("Crea");
             
             
-            low = new Low(this);
-            low.setSize(200,200);
-            low.setLocation(1500, 400);
+            low = new Low(p);
+            low.setSize(20,10);
+            low.setLocation(XLadrillo, YLadrillo);
+            low.setBackground(Color.green);
+            p.getContentPane().doLayout();
+            low.
             p.add(low);
+            low.setVisible(false);
+            low.setVisible(true);
         }else{
             System.out.println("NO Crea");
             

@@ -22,6 +22,7 @@ public class Principal extends JFrame {
     Bola bola;
     NumPuntuacion numPuntuacion;
     int puntuacion;
+    JLabel label;
     Icon[] auxExplosion = new Icon[8];
 
     Principal() {
@@ -29,16 +30,37 @@ public class Principal extends JFrame {
         setLayout(null);
 
         getContentPane().setBackground(Color.BLACK);
-
         getContentPane().setFocusable(true);
         getContentPane().addKeyListener(new movimientoKey());
         int cont = 0;
+        int cont1 = 0;
         int puntuacion = 0;
         barra = new Barra(this);
         barra.setSize(130, 25);
         barra.setLocation(430, 900);
         add(barra);
+        
+        powerUp = new PowerUp(this);
+        add(powerUp);
 
+        int x3 = 144;
+        int y3 = 250;
+        for (int i = 0; i < 88; i++) {
+            label = new JLabel();
+            label.setSize(63, 25);
+            label.setLocation(x3, y3);
+            label.setOpaque(true);
+            label.setBackground(Color.CYAN);
+            setVisible(false);
+            this.add(label);
+            if ((i + 1) % 11 == 0) {
+                x3 = 144;
+                y3 += 26;
+                cont1++;
+            } else {
+                x3 += 64;
+            }
+        }
 
         int x1 = 170;
         int y1 = 940;
@@ -50,10 +72,6 @@ public class Principal extends JFrame {
             x1 += 60;
         }
 
-        powerUp = new PowerUp(this);
-        add(powerUp);
-
-        
 
         int x2 = 305;
         int y2 = 95;
@@ -83,8 +101,8 @@ public class Principal extends JFrame {
         }
         bola = new Bola(this);
         bola.setSize(15, 15);
-        bola.setLocation(490, 875);
-        // bola.setLocation(490, 200);
+        // bola.setLocation(490, 875);
+        bola.setLocation(490, 200);
         add(bola);
 
         score = new Score(this);
