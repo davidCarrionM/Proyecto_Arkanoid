@@ -22,7 +22,6 @@ public class Principal extends JFrame {
     Bola bola;
     NumPuntuacion numPuntuacion;
     int puntuacion;
-    JLabel label;
     Icon[] auxExplosion = new Icon[8];
 
     Principal() {
@@ -42,25 +41,6 @@ public class Principal extends JFrame {
         
         powerUp = new PowerUp(this);
         add(powerUp);
-
-        int x3 = 144;
-        int y3 = 250;
-        for (int i = 0; i < 88; i++) {
-            label = new JLabel();
-            label.setSize(63, 25);
-            label.setLocation(x3, y3);
-            label.setOpaque(true);
-            label.setBackground(Color.CYAN);
-            setVisible(false);
-            this.add(label);
-            if ((i + 1) % 11 == 0) {
-                x3 = 144;
-                y3 += 26;
-                cont1++;
-            } else {
-                x3 += 64;
-            }
-        }
 
         int x1 = 170;
         int y1 = 940;
