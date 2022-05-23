@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-public class Low extends JLabel implements ActionListener {
+public class Tall extends JLabel implements ActionListener {
     Principal p;
     Timer timer;
     Timer timerEmpezar;
@@ -16,9 +16,9 @@ public class Low extends JLabel implements ActionListener {
     boolean move = false;
     boolean empezar = false;
     int cont = 0;
-    
-    Low(Principal p) {
-        ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power4.png"));
+   
+    Tall(Principal p) {
+        ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power1.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon imgPre = new ImageIcon(tamaño);
@@ -41,32 +41,32 @@ public class Low extends JLabel implements ActionListener {
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;
-                this.empezar=true;
-                if(p.bola.velocidady<0){
-                    p.bola.velocidady = -1;
-                }else{
-                    
-                    p.bola.velocidady = +1;
-                }
+                this.empezar = true;       
+                ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/barra.png"));
+                Image conversion = imagen.getImage();
+                Image tamaño = conversion.getScaledInstance(160, 25, Image.SCALE_SMOOTH);
+                ImageIcon imgPre = new ImageIcon(tamaño);
+                p.barra.setIcon(imgPre);
+                p.barra.setSize(160, 25);
+                p.barra.setVisible(true);
+                p.bola.powerCrecer = 30; 
             }
-            
+
             if(this.getY() >= 950){
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;
             }
-            //130,25
+
         }      
         if(e.getSource()==timerEmpezar&&empezar){
+          
             if(cont==7){
-                if(p.bola.velocidady<0){
-                    p.bola.velocidady = -4;
-                }else{
-                    
-                    p.bola.velocidady = +4;
-                }
+                p.barra.setIcon(p.barra.imgPre);
+                p.barra.setSize(130,25);
                 empezar = false;
                 cont = 0;
+                p.bola.powerCrecer = 0;
                 timer.stop();
                 timerEmpezar.stop();
             }

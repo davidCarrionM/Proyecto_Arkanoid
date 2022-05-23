@@ -19,6 +19,7 @@ public class Bola extends JLabel implements ActionListener {
     boolean iniciarIzquierda = false;
     boolean iniciarDerecha = false;
     Principal p;
+    int powerCrecer = 0;
     private ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/bola.png"));
     private Image conversion = imagen.getImage();
     private Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
@@ -116,19 +117,19 @@ public class Bola extends JLabel implements ActionListener {
             }
             // barra derecha
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 100
-                    && this.getX() <= (p.barra.getX() + 120)) {
+                    && this.getX() <= (p.barra.getX() + 120+powerCrecer)) {
                 velocidady = -4;
                 velocidadx = +2;
             }
             // barra izquierda
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() - 10
-                    && this.getX() <= (p.barra.getX() + 20)) {
+                    && this.getX() <= (p.barra.getX() + 20+powerCrecer)) {
                 velocidady = -4;
                 velocidadx = -2;
             }
             // barra centro
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 21
-                    && this.getX() <= (p.barra.getX() + 109)) {
+                    && this.getX() <= (p.barra.getX() + 109+powerCrecer)) {
                 velocidady = -4;
             }
             // techo

@@ -9,8 +9,8 @@ public class PowerUp extends JLabel {
     Principal p;
     int XLadrillo;
     int YLadrillo;
+    Tall tall;
     Low low;
-
     PowerUp(Principal p){
         this.p = p;
     }
@@ -18,34 +18,28 @@ public class PowerUp extends JLabel {
     public void gestionar(){
         int gestion = (int) (Math.random()*100);
         
-        if(gestion>=0 && gestion<=20){
+        if(gestion>=0 && gestion<10){
             System.out.println("Crea");
             
-            low = new Low(p);
-            low.setSize(20,10);
-            low.setLocation(XLadrillo+22, YLadrillo+7);
-            low.setOpaque(true);
-            low.setBackground(Color.green);
+            tall = new Tall(p);
+            tall.setSize(30,30);
+            tall.setLocation(XLadrillo+22, YLadrillo+7);
             p.getContentPane().doLayout();
-            p.add(low,1);
-             low.setVisible(false);
-            low.setVisible(true);
-            low.move = true;
+            p.add(tall,1);
+             tall.setVisible(false);
+            tall.setVisible(true);
+            tall.move = true;
         }else{
-            if(gestion>20 && gestion<=40){
-                System.out.println("Crea");
-                
+            if(gestion>=10 && gestion<50){
                 low = new Low(p);
-                low.setSize(20,10);
+                low.setSize(30,30);
                 low.setLocation(XLadrillo+22, YLadrillo+7);
-                low.setOpaque(true);
-                low.setBackground(Color.yellow);
                 p.getContentPane().doLayout();
                 p.add(low,1);
                  low.setVisible(false);
                 low.setVisible(true);
-            }else{
-                
+                low.move = true;
+
             }
         }
 

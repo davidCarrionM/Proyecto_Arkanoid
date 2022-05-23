@@ -9,10 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 public class Barra extends JLabel implements ActionListener{
-    private ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/barra.png"));
-    private Image conversion = imagen.getImage();
-    private Image tamaño = conversion.getScaledInstance(130, 25, Image.SCALE_SMOOTH);
-    private ImageIcon imgPre = new ImageIcon(tamaño);
+     ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/barra.png"));
+     Image conversion = imagen.getImage();
+     Image tamaño = conversion.getScaledInstance(130, 25, Image.SCALE_SMOOTH);
+     ImageIcon imgPre = new ImageIcon(tamaño);
     Principal p;
     Timer timerBarraDerecha;
     Timer timerBarraIzquierda;

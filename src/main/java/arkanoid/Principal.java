@@ -81,8 +81,8 @@ public class Principal extends JFrame {
         }
         bola = new Bola(this);
         bola.setSize(15, 15);
-        // bola.setLocation(490, 875);
-        bola.setLocation(490, 200);
+        bola.setLocation(490, 875);
+        // bola.setLocation(490, 200);
         add(bola);
 
         score = new Score(this);
