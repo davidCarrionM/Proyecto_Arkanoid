@@ -1,5 +1,6 @@
 package arkanoid;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,7 @@ public class Low extends JLabel implements ActionListener{
     Principal p;
     Timer timer;
     boolean move = false;
+
 
     Low(Principal p){
         this.p = p;

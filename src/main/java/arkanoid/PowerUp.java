@@ -30,6 +30,7 @@ public class PowerUp extends JLabel {
             p.add(low,1);
              low.setVisible(false);
             low.setVisible(true);
+            low.move = true;
         }else{
             if(gestion>20 && gestion<=40){
                 System.out.println("Crea");
