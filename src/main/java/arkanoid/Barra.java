@@ -18,6 +18,7 @@ public class Barra extends JLabel implements ActionListener{
     Timer timerBarraIzquierda;
     boolean flagBarraDerecha = false;
     boolean flagBarraIzquierda = false;
+    public int movimiento = 10;
 
     Barra(Principal p){
         this.setIcon(imgPre);
@@ -33,24 +34,24 @@ public class Barra extends JLabel implements ActionListener{
         if(e.getSource()==timerBarraDerecha && flagBarraDerecha){
             if (p.bola.flagEmpezar) {
                 if (this.getX() + 10 <= 710-p.bola.powerCrecer) {
-                    this.setLocation(this.getX() + 10, this.getY());
+                    this.setLocation(this.getX() + movimiento, this.getY());
                 }
             } else {
                 if (this.getX() + 10 <= 710-p.bola.powerCrecer) {
-                    this.setLocation(this.getX() + 10, this.getY());
-                    p.bola.setLocation(p.bola.getX() + 10, p.bola.getY());
+                    this.setLocation(this.getX() + movimiento, this.getY());
+                    p.bola.setLocation(p.bola.getX() + movimiento, p.bola.getY());
                 }
             }
         }
         if(e.getSource()==timerBarraIzquierda && flagBarraIzquierda){
             if (p.bola.flagEmpezar) {
                 if (this.getX() - 10 >= 150) {
-                    this.setLocation(this.getX() - 10, this.getY());
+                    this.setLocation(this.getX() - movimiento, this.getY());
                 }
             } else {
                 if (this.getX() - 10 >= 150) {
-                    this.setLocation(this.getX() - 10, this.getY());
-                    p.bola.setLocation(p.bola.getX() - 10, p.bola.getY());
+                    this.setLocation(this.getX() - movimiento, this.getY());
+                    p.bola.setLocation(p.bola.getX() - movimiento, p.bola.getY());
                 }
             }
         }

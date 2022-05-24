@@ -1,7 +1,6 @@
 package arkanoid;
 
 
-import java.awt.Color;
 import javax.swing.JLabel;
 
 import arkanoid.poderes.*;
@@ -14,6 +13,7 @@ public class PowerUp extends JLabel {
     Low low;
     Explote explote;
     Bad bad;
+    Speed speed;
     PowerUp(Principal p){
         this.p = p;
     }
@@ -53,7 +53,7 @@ public class PowerUp extends JLabel {
                     explote.setVisible(true);
                     explote.move = true;
                 }else{
-                    if(gestion>=20 && gestion<90){
+                    if(gestion>=30 && gestion<40){
                         bad = new Bad(p);
                         bad.setSize(30,30);
                         bad.setLocation(XLadrillo+22, YLadrillo+7);
@@ -62,6 +62,17 @@ public class PowerUp extends JLabel {
                         bad.setVisible(false);
                         bad.setVisible(true);
                         bad.move = true;
+                    }else{
+                        if(gestion>=40 && gestion<50){
+                            speed = new Speed(p);
+                            speed.setSize(30,30);
+                            speed.setLocation(XLadrillo+22, YLadrillo+7);
+                            p.getContentPane().doLayout();
+                            p.add(speed,1);
+                            speed.setVisible(false);
+                            speed.setVisible(true);
+                            speed.move = true;
+                        }
                     }
                 }
             }
