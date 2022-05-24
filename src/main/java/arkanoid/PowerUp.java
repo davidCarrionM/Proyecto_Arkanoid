@@ -14,6 +14,7 @@ public class PowerUp extends JLabel {
     Explote explote;
     Bad bad;
     Speed speed;
+    Sticky sticky;
     PowerUp(Principal p){
         this.p = p;
     }
@@ -72,6 +73,17 @@ public class PowerUp extends JLabel {
                             speed.setVisible(false);
                             speed.setVisible(true);
                             speed.move = true;
+                        }else{
+                            if(gestion>=50 && gestion<100){
+                                sticky = new Sticky(p);
+                                sticky.setSize(30,30);
+                                sticky.setLocation(XLadrillo+22, YLadrillo+7);
+                                p.getContentPane().doLayout();
+                                p.add(sticky,1);
+                                sticky.setVisible(false);
+                                sticky.setVisible(true);
+                                sticky.move = true;
+                            }
                         }
                     }
                 }

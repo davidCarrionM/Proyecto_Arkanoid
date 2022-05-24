@@ -12,7 +12,7 @@ import javax.swing.Timer;
 
 public class Bola extends JLabel implements ActionListener {
     Timer timerBola;
-    boolean flagEmpezar = false;
+    public boolean flagEmpezar = false;
     int contEliminar = 0;
     int velocidady = -4;
     int velocidadx = 0;
@@ -34,8 +34,6 @@ public class Bola extends JLabel implements ActionListener {
     }
 
     public void eliminar(Component objeto) {
-        // objeto.setVisible(false);
-        // p.remove(objeto);
         ((Ladrillo)objeto).animacion = true;
         p.puntuacion += 10;
         contEliminar++;

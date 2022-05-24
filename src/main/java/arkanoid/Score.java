@@ -14,5 +14,8 @@ public class Score extends JLabel{
     Score(Principal p){
         this.p=p;
         this.setIcon(imgPre);
+
+
+        
     }
 }
