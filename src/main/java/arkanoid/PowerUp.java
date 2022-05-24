@@ -11,6 +11,7 @@ public class PowerUp extends JLabel {
     int YLadrillo;
     Tall tall;
     Low low;
+    Explote explote;
     PowerUp(Principal p){
         this.p = p;
     }
@@ -26,11 +27,11 @@ public class PowerUp extends JLabel {
             tall.setLocation(XLadrillo+22, YLadrillo+7);
             p.getContentPane().doLayout();
             p.add(tall,1);
-             tall.setVisible(false);
+            tall.setVisible(false);
             tall.setVisible(true);
             tall.move = true;
         }else{
-            if(gestion>=10 && gestion<50){
+            if(gestion>=10 && gestion<20){
                 low = new Low(p);
                 low.setSize(30,30);
                 low.setLocation(XLadrillo+22, YLadrillo+7);
@@ -39,7 +40,17 @@ public class PowerUp extends JLabel {
                  low.setVisible(false);
                 low.setVisible(true);
                 low.move = true;
-
+            }else{
+                if(gestion>=20 && gestion<30){
+                    explote = new Explote(p);
+                    explote.setSize(30,30);
+                    explote.setLocation(XLadrillo+22, YLadrillo+7);
+                    p.getContentPane().doLayout();
+                    p.add(explote,1);
+                    explote.setVisible(false);
+                    explote.setVisible(true);
+                    explote.move = true;
+                }
             }
         }
 

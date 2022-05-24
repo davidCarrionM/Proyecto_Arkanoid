@@ -18,7 +18,7 @@ public class Tall extends JLabel implements ActionListener {
     int cont = 0;
    
     Tall(Principal p) {
-        ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power1.png"));
+        ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power0.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon imgPre = new ImageIcon(tamaño);
