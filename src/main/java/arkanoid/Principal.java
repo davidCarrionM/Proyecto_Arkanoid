@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class Principal extends JFrame{
     
-    Juego juego;
+    public static Juego juego;
 
     Principal(){
 
