@@ -1,6 +1,6 @@
 # README
 
-Java 11 base application.
+Proyecto del juego Arkanoid 1ºDam
 
 ## BASE SETUP
 
