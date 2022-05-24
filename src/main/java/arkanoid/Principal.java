@@ -15,11 +15,11 @@ public class Principal extends JFrame {
     NumPuntuacion[] auxScore = new NumPuntuacion[6];
     Score score;
     HighScore highScore;
-    Barra barra;
+    public Barra barra;
     Barrera barrera;
     Ladrillo ladrillo;
     PowerUp powerUp;
-    Bola bola;
+    public Bola bola;
     NumPuntuacion numPuntuacion;
     int puntuacion;
     Icon[] auxExplosion = new Icon[8];
@@ -112,6 +112,7 @@ public class Principal extends JFrame {
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxExplosion[i] = imgPre1;
         }
+        
 
     }
 

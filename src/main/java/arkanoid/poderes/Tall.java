@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.poderes;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -8,16 +8,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+import arkanoid.Bola;
+import arkanoid.Principal;
+
 public class Tall extends JLabel implements ActionListener {
     Principal p;
     Timer timer;
     Timer timerEmpezar;
 
-    boolean move = false;
+    public boolean move = false;
     boolean empezar = false;
     int cont = 0;
    
-    Tall(Principal p) {
+    public Tall(Principal p) {
         ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power0.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);

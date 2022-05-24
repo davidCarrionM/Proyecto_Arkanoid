@@ -19,8 +19,8 @@ public class Bola extends JLabel implements ActionListener {
     boolean iniciarIzquierda = false;
     boolean iniciarDerecha = false;
     Principal p;
-    int vel =4;
-    int powerCrecer = 0;
+    public int vel =4;
+    public int powerCrecer = 0;
     ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/bola.png"));
     Image conversion = imagen.getImage();
     Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);

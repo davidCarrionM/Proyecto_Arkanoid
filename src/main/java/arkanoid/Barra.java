@@ -12,7 +12,7 @@ public class Barra extends JLabel implements ActionListener{
      ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/barra.png"));
      Image conversion = imagen.getImage();
      Image tamaño = conversion.getScaledInstance(130, 25, Image.SCALE_SMOOTH);
-     ImageIcon imgPre = new ImageIcon(tamaño);
+     public ImageIcon imgPre = new ImageIcon(tamaño);
     Principal p;
     Timer timerBarraDerecha;
     Timer timerBarraIzquierda;

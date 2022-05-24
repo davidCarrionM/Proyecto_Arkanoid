@@ -1,5 +1,6 @@
-package arkanoid;
+package arkanoid.poderes;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,17 +9,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-public class Low extends JLabel implements ActionListener {
+import arkanoid.Ladrillo;
+import arkanoid.Principal;
+
+public class Explote extends JLabel implements ActionListener {
     Principal p;
     Timer timer;
-    Timer timerEmpezar;
 
-    boolean move = false;
+    public boolean move = false;
     boolean empezar = false;
     int cont = 0;
     
-    Low(Principal p) {
-        ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power4.png"));
+    public Explote(Principal p) {
+        ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power1.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon imgPre = new ImageIcon(tamaño);
@@ -26,8 +29,6 @@ public class Low extends JLabel implements ActionListener {
         this.p = p;
         timer = new Timer(50, this);
         timer.start();
-        timerEmpezar = new Timer(1000, this);
-        timerEmpezar.start();
 
     }
 
@@ -41,14 +42,14 @@ public class Low extends JLabel implements ActionListener {
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;
-                this.empezar=true;
-                p.bola.vel = 2;
-                // if(p.bola.velocidady<0){
-                //     p.bola.velocidady = -1;
-                // }else{
-                    
-                //     p.bola.velocidady = +1;
-                // }
+                for (Component componente : p.getContentPane().getComponents()) {
+                    if(componente.getClass() == Ladrillo.class){
+                        int random = (int)(Math.random()*10);
+                        if(random == 1||random == 2){
+                            p.bola.eliminar(componente);
+                        }
+                    }
+                }
             }
             
             if(this.getY() >= 950){
@@ -56,19 +57,7 @@ public class Low extends JLabel implements ActionListener {
                 this.setVisible(false);
                 this.move = false;
             }
-            //130,25
         }      
-        if(e.getSource()==timerEmpezar&&empezar){
-            if(cont==7){
-                p.bola.vel = 4;
-                empezar = false;
-                cont = 0;
-                timer.stop();
-                timerEmpezar.stop();
-            }
-            cont++;
-        }
-        
     }
 
 }
