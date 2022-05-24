@@ -1,6 +1,5 @@
 package arkanoid.poderes;
 
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,18 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import arkanoid.Ladrillo;
-import arkanoid.Principal;
+import arkanoid.Juego;
 
 public class Sticky extends JLabel implements ActionListener {
-    Principal p;
+    Juego p;
     Timer timer;
 
     public boolean move = false;
     boolean empezar = false;
     int cont = 0;
     
-    public Sticky(Principal p) {
+    public Sticky(Juego p) {
         ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power6.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);

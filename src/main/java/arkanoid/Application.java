@@ -8,6 +8,8 @@ public class Application {
     Principal frame = new Principal();
     frame.setSize(1000, 1000);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setResizable(false);
     frame.setVisible(true);
+
   }
 }

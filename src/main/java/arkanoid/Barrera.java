@@ -12,12 +12,12 @@ public class Barrera extends JLabel{
     private Image conversion = imagen.getImage();
     private Image tamaño = conversion.getScaledInstance(50, 10, Image.SCALE_SMOOTH);
     private ImageIcon imgPre = new ImageIcon(tamaño);
-    Principal p;
+    Juego p;
     Timer timerAnimacion;
     boolean animacion;
     int contaux = 0;
     
-    Barrera(Principal p ){
+    Barrera(Juego p ){
         this.p=p;
         this.setIcon(imgPre);
 

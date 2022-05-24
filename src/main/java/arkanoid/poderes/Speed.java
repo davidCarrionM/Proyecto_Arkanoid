@@ -8,10 +8,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import arkanoid.Principal;
+import arkanoid.Juego;
 
 public class Speed extends JLabel implements ActionListener {
-    Principal p;
+    Juego p;
     Timer timer;
     Timer timerEmpezar;
 
@@ -19,7 +19,7 @@ public class Speed extends JLabel implements ActionListener {
     boolean empezar = false;
     int cont = 0;
     
-    public Speed(Principal p) {
+    public Speed(Juego p) {
         ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power7.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);

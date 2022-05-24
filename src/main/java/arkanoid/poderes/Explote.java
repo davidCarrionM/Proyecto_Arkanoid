@@ -10,17 +10,17 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import arkanoid.Ladrillo;
-import arkanoid.Principal;
+import arkanoid.Juego;
 
 public class Explote extends JLabel implements ActionListener {
-    Principal p;
+    Juego p;
     Timer timer;
 
     public boolean move = false;
     boolean empezar = false;
     int cont = 0;
     
-    public Explote(Principal p) {
+    public Explote(Juego p) {
         ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power1.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -42,7 +42,7 @@ public class Explote extends JLabel implements ActionListener {
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;
-                for (Component componente : p.getContentPane().getComponents()) {
+                for (Component componente : p.getComponents()) {
                     if(componente.getClass() == Ladrillo.class){
                         int random = (int)(Math.random()*10);
                         if(random == 1||random == 2){

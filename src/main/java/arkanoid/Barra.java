@@ -13,14 +13,14 @@ public class Barra extends JLabel implements ActionListener{
      Image conversion = imagen.getImage();
      Image tamaño = conversion.getScaledInstance(130, 25, Image.SCALE_SMOOTH);
      public ImageIcon imgPre = new ImageIcon(tamaño);
-    Principal p;
+    Juego p;
     Timer timerBarraDerecha;
     Timer timerBarraIzquierda;
     boolean flagBarraDerecha = false;
     boolean flagBarraIzquierda = false;
     public int movimiento = 10;
 
-    Barra(Principal p){
+    Barra(Juego p){
         this.setIcon(imgPre);
         this.p=p;
         timerBarraDerecha = new Timer(17, this);

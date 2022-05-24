@@ -18,7 +18,7 @@ public class Bola extends JLabel implements ActionListener {
     int velocidadx = 0;
     boolean iniciarIzquierda = false;
     boolean iniciarDerecha = false;
-    Principal p;
+    Juego p;
     public int vel =4;
     public int powerCrecer = 0;
     ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/bola.png"));
@@ -26,7 +26,7 @@ public class Bola extends JLabel implements ActionListener {
     Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
     ImageIcon imgPre = new ImageIcon(tamaño);
 
-    Bola(Principal p) {
+    Bola(Juego p) {
         timerBola = new Timer(15, this);
         timerBola.start();
         this.p = p;
@@ -37,13 +37,13 @@ public class Bola extends JLabel implements ActionListener {
         ((Ladrillo)objeto).animacion = true;
         p.puntuacion += 10;
         contEliminar++;
-        // for(int i = 0; i<p.auxScore.length;i++){
-        // ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num"+(String.format("%06d", p.puntuacion).charAt(i)+".png")));
-        // Image conversion1 = imagen1.getImage();
-        //     Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-        //     ImageIcon imgPre1 = new ImageIcon(tamaño1);
-        //     p.auxScore[i].setIcon(imgPre1);
-        // }
+        for(int i = 0; i<p.auxScore.length;i++){
+        ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num"+(String.format("%06d", p.puntuacion).charAt(i)+".png")));
+        Image conversion1 = imagen1.getImage();
+            Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+            ImageIcon imgPre1 = new ImageIcon(tamaño1);
+            p.auxScore[i].setIcon(imgPre1);
+        }
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Bola extends JLabel implements ActionListener {
             this.setLocation(this.getX() + velocidadx, this.getY() + velocidady);
 
             // ladrillo
-            for (Component component : p.getContentPane().getComponents()) {
+            for (Component component : p.getComponents()) {
                 if (component.getClass() == Ladrillo.class) {
                     // ladrillo-abajo
                     if (this.getY() <= (component.getY() + 25)
@@ -93,7 +93,7 @@ public class Bola extends JLabel implements ActionListener {
                 }
             }
             // Barrera
-            for (Component component : p.getContentPane().getComponents()) {
+            for (Component component : p.getComponents()) {
                 if (component.getClass() == Barrera.class) {
                     if (this.getY() >= component.getY() && this.getX() >= component.getX()
                             && this.getX() <= (component.getX() + 50)) {

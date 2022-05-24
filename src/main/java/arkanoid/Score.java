@@ -6,16 +6,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Score extends JLabel{
-    Principal p;
+    Juego p;
     ImageIcon imagen = new ImageIcon(Score.class.getResource("/arkanoid/img/score.jpg"));
     Image conversion = imagen.getImage();
     Image tamaño = conversion.getScaledInstance(200, 70, Image.SCALE_SMOOTH);
     ImageIcon imgPre = new ImageIcon(tamaño);
-    Score(Principal p){
+    Score(Juego p){
         this.p=p;
         this.setIcon(imgPre);
 
 
-        
+
     }
 }

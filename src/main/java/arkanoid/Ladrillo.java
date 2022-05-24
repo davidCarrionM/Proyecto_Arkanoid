@@ -12,9 +12,9 @@ public class Ladrillo extends JLabel implements ActionListener {
     boolean animacion = false;
     Timer timerAnimacion;
     int contaux = 0;
-    Principal p;
+    Juego p;
 
-    Ladrillo(Principal p, int index) {
+    Ladrillo(Juego p, int index) {
         ImageIcon imagen = new ImageIcon(Ladrillo.class.getResource("/arkanoid/img/bloque" + index + ".png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(63, 25, Image.SCALE_SMOOTH);

@@ -10,10 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import arkanoid.Barrera;
-import arkanoid.Principal;
+import arkanoid.Juego;
 
 public class Bad extends JLabel implements ActionListener {
-    Principal p;
+    Juego p;
     Timer timer;
     Timer timerEmpezar;
 
@@ -21,7 +21,7 @@ public class Bad extends JLabel implements ActionListener {
     boolean empezar = false;
     int cont = 0;
     
-    public Bad(Principal p) {
+    public Bad(Juego p) {
         ImageIcon imagen = new ImageIcon(Bad.class.getResource("/arkanoid/img/power5.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -42,7 +42,7 @@ public class Bad extends JLabel implements ActionListener {
 
 
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130)) {
-                for (Component componente : p.getContentPane().getComponents()) {
+                for (Component componente : p.getComponents()) {
                     if(componente.getClass() == Barrera.class){
                         int random = (int)(Math.random()*3);
                         if(random == 1){

@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import arkanoid.poderes.*;
 
 public class PowerUp extends JLabel {
-    Principal p;
+    Juego p;
     int XLadrillo;
     int YLadrillo;
     Tall tall;
@@ -15,7 +15,7 @@ public class PowerUp extends JLabel {
     Bad bad;
     Speed speed;
     Sticky sticky;
-    PowerUp(Principal p){
+    PowerUp(Juego p){
         this.p = p;
     }
 
@@ -23,12 +23,9 @@ public class PowerUp extends JLabel {
         int gestion = (int) (Math.random()*100);
         
         if(gestion>=0 && gestion<10){
-            System.out.println("Crea");
-            
             tall = new Tall(p);
             tall.setSize(30,30);
             tall.setLocation(XLadrillo+22, YLadrillo+7);
-            p.getContentPane().doLayout();
             p.add(tall,1);
             tall.setVisible(false);
             tall.setVisible(true);
@@ -38,7 +35,6 @@ public class PowerUp extends JLabel {
                 low = new Low(p);
                 low.setSize(30,30);
                 low.setLocation(XLadrillo+22, YLadrillo+7);
-                p.getContentPane().doLayout();
                 p.add(low,1);
                  low.setVisible(false);
                 low.setVisible(true);
@@ -48,7 +44,6 @@ public class PowerUp extends JLabel {
                     explote = new Explote(p);
                     explote.setSize(30,30);
                     explote.setLocation(XLadrillo+22, YLadrillo+7);
-                    p.getContentPane().doLayout();
                     p.add(explote,1);
                     explote.setVisible(false);
                     explote.setVisible(true);
@@ -58,7 +53,6 @@ public class PowerUp extends JLabel {
                         bad = new Bad(p);
                         bad.setSize(30,30);
                         bad.setLocation(XLadrillo+22, YLadrillo+7);
-                        p.getContentPane().doLayout();
                         p.add(bad,1);
                         bad.setVisible(false);
                         bad.setVisible(true);
@@ -68,17 +62,15 @@ public class PowerUp extends JLabel {
                             speed = new Speed(p);
                             speed.setSize(30,30);
                             speed.setLocation(XLadrillo+22, YLadrillo+7);
-                            p.getContentPane().doLayout();
                             p.add(speed,1);
                             speed.setVisible(false);
                             speed.setVisible(true);
                             speed.move = true;
                         }else{
-                            if(gestion>=50 && gestion<100){
+                            if(gestion>=50 && gestion<60){
                                 sticky = new Sticky(p);
                                 sticky.setSize(30,30);
                                 sticky.setLocation(XLadrillo+22, YLadrillo+7);
-                                p.getContentPane().doLayout();
                                 p.add(sticky,1);
                                 sticky.setVisible(false);
                                 sticky.setVisible(true);
