@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 public class Juego extends JPanel {
     JLabel lblFondo;
     NumPuntuacion[] auxScore = new NumPuntuacion[6];
@@ -23,10 +24,13 @@ public class Juego extends JPanel {
     NumPuntuacion numPuntuacion;
     int puntuacion;
     Icon[] auxExplosion = new Icon[8];
+    Principal a;
 
-    Juego() {
+    Juego(Principal a) {
         setLayout(null);
-
+        this.setFocusable(true);
+        this.grabFocus();
+        this.a=a;
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(new movimientoKey());
@@ -77,7 +81,7 @@ public class Juego extends JPanel {
                 x += 64;
             }
         }
-        bola = new Bola(this);
+        bola = new Bola(this,a);
         bola.setSize(15, 15);
         bola.setLocation(490, 875);
         // bola.setLocation(490, 200);
@@ -111,10 +115,6 @@ public class Juego extends JPanel {
             auxExplosion[i] = imgPre1;
         }
         
-
-    }
-
-    void crearPower(){
 
     }
 

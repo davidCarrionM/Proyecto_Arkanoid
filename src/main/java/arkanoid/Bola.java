@@ -26,11 +26,13 @@ public class Bola extends JLabel implements ActionListener {
     Image conversion = imagen.getImage();
     Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
     ImageIcon imgPre = new ImageIcon(tamaño);
+    Principal a;
 
-    Bola(Juego p) {
+    Bola(Juego p,Principal a) {
         timerBola = new Timer(15, this);
         timerBola.start();
         this.p = p;
+        this.a = a;
         this.setIcon(imgPre);
     }
 
@@ -113,8 +115,12 @@ public class Bola extends JLabel implements ActionListener {
                 System.out.println("GAME OVER");
                 flagEmpezar = false;
                 p.puntuacion = 0;
-                JOptionPane.showMessageDialog(null, "GAME OVER");
-                Principal.juego.setVisible(false);
+                a.gameOver = new GameOver(a);
+                a.gameOver.setSize(1000,1000);
+                a.gameOver.setVisible(true);
+                a.add(a.gameOver);
+                a.juego.setVisible(false);
+                // Principal.eliminar = true;              
             }
             // barra derecha
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 100
