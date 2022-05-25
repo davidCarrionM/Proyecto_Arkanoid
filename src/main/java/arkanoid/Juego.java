@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +26,7 @@ public class Juego extends JPanel {
     Icon[] auxExplosion = new Icon[8];
     Principal a;
     public int powerCrecer = 0;
+    ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
 
     public void Ganar() {
         System.out.println("GANASTE");
@@ -69,7 +71,7 @@ public class Juego extends JPanel {
             barrera = new Barrera(this);
             barrera.setSize(50, 10);
             barrera.setLocation(x1, y1);
-            // this.add(barrera);
+            this.add(barrera);
             x1 += 60;
         }
 
@@ -90,7 +92,9 @@ public class Juego extends JPanel {
             ladrillo = new Ladrillo(this, cont);
             ladrillo.setSize(63, 25);
             ladrillo.setLocation(x, y);
+            ladrillos.add(ladrillo);
             this.add(ladrillo);
+
             if ((i + 1) % 11 == 0) {
                 x = 144;
                 y += 26;

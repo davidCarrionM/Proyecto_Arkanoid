@@ -33,11 +33,11 @@ public class Principal extends JFrame implements ActionListener{
         add(menu);
         gameOver = new GameOver(this);
         gameOver.setSize(1000,1000);
-        gameOver.setVisible(true);
+        gameOver.setVisible(false);
         add(gameOver);
         win = new Win(this);
         win.setSize(1000,1000);
-        win.setVisible(false);
+        win.setVisible(true);
         add(win);
         
     }

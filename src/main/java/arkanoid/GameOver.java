@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GameOver extends JPanel implements ActionListener{
@@ -15,6 +16,9 @@ public class GameOver extends JPanel implements ActionListener{
     JButton btnMenu;
     JButton btnAgain;
     Juego juego;
+    JLabel highScore;
+
+    JLabel lblOver;
     Principal a;
     ImageIcon imagen2 = new ImageIcon(Menu.class.getResource("/arkanoid/img/play.png"));
     Image conversion2 = imagen2.getImage();
@@ -45,13 +49,22 @@ public class GameOver extends JPanel implements ActionListener{
     Image conversion7 = imagen7.getImage();
     Image tamaño7= conversion7.getScaledInstance(220, 60, Image.SCALE_SMOOTH);
     ImageIcon imgPre7 = new ImageIcon(tamaño7);
+
+    ImageIcon imagen8 = new ImageIcon(Menu.class.getResource("/arkanoid/img/gameOver.png"));
+    Image conversion8 = imagen8.getImage();
+    Image tamaño8= conversion8.getScaledInstance(500, 200, Image.SCALE_SMOOTH);
+    ImageIcon imgPre8 = new ImageIcon(tamaño8);
     
     public GameOver(Principal a){
         setLayout(null);
         this.a=a;
         this.setBackground(Color.BLACK);
 
-        // a.remove(juego);
+        lblOver = new JLabel();
+        lblOver.setSize(500,200);
+        lblOver.setLocation(250, 300);
+        lblOver.setIcon(imgPre8);
+        add(lblOver);
         this.setVisible(true);
         btnAgain = new JButton();
         btnAgain.setSize(220,50);
@@ -85,6 +98,17 @@ public class GameOver extends JPanel implements ActionListener{
         btnExit.setContentAreaFilled(false);
         btnExit.addMouseListener(new MouseEvent());
         add(btnExit);
+        ImageIcon imagen0 = new ImageIcon(HighScore.class.getResource("/arkanoid/img/highscore.jpg"));
+        Image conversion0 = imagen0.getImage();
+        Image tamaño0 = conversion0.getScaledInstance(270, 100, Image.SCALE_SMOOTH);
+        ImageIcon imgPre0 = new ImageIcon(tamaño0);
+        highScore = new JLabel();
+        highScore.setSize(270, 100);
+        highScore.setLocation(480, 30);
+        highScore.setIcon(imgPre0);
+        add(highScore);
+
+        
     }
 
     public class MouseEvent extends MouseAdapter{
@@ -123,6 +147,10 @@ public class GameOver extends JPanel implements ActionListener{
             juego.setVisible(true);
             a.add(juego);
             // Principal.juego.setVisible(true);
+            this.setVisible(false);
+        }
+        if(e.getSource() == btnMenu){
+            a.menu.setVisible(true);
             this.setVisible(false);
         }
         if(e.getSource() == btnExit){

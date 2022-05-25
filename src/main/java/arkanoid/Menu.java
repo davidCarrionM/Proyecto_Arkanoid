@@ -15,6 +15,7 @@ public class Menu extends JPanel implements ActionListener {
     JButton btnExit;
     JButton btnMenu;
     JButton btnStart;
+    JButton btnRead;
     Juego juego;
     Principal a;
     JLabel taito;
@@ -38,6 +39,16 @@ public class Menu extends JPanel implements ActionListener {
     Image conversion5 = imagen5.getImage();
     Image tamaño5 = conversion5.getScaledInstance(220, 60, Image.SCALE_SMOOTH);
     ImageIcon imgPre5 = new ImageIcon(tamaño5);
+
+    ImageIcon imagen6 = new ImageIcon(Menu.class.getResource("/arkanoid/img/read.png"));
+    Image conversion6 = imagen6.getImage();
+    Image tamaño6 = conversion6.getScaledInstance(120, 50, Image.SCALE_SMOOTH);
+    ImageIcon imgPre6 = new ImageIcon(tamaño6);
+
+    ImageIcon imagen7 = new ImageIcon(Menu.class.getResource("/arkanoid/img/read+.png"));
+    Image conversion7 = imagen7.getImage();
+    Image tamaño7 = conversion7.getScaledInstance(120, 50, Image.SCALE_SMOOTH);
+    ImageIcon imgPre7 = new ImageIcon(tamaño7);
 
     public Menu(Principal a) {
         setLayout(null);
@@ -65,6 +76,16 @@ public class Menu extends JPanel implements ActionListener {
         btnExit.setIcon(imgPre3);
         btnExit.addMouseListener(new MouseEvent());
         add(btnExit);
+        btnRead = new JButton("READ");
+        btnRead.setSize(120, 50);
+        btnRead.setLocation(10, 10);
+        btnRead.addActionListener(this);
+        btnRead.setFocusPainted(false);
+        btnRead.setBorderPainted(false);
+        btnRead.setContentAreaFilled(false);
+        btnRead.setIcon(imgPre6);
+        btnRead.addMouseListener(new MouseEvent());
+        add(btnRead);
 
         ImageIcon imagen1 = new ImageIcon(Menu.class.getResource("/arkanoid/img/titulo.png"));
         Image conversion1 = imagen1.getImage();
@@ -100,6 +121,9 @@ public class Menu extends JPanel implements ActionListener {
             if(e.getSource()==btnExit){
                 btnExit.setIcon(imgPre5);
             }
+            if(e.getSource() == btnRead){
+                btnRead.setIcon(imgPre7);
+            }
         }
         @Override
         public void mouseExited(java.awt.event.MouseEvent e) {
@@ -108,6 +132,9 @@ public class Menu extends JPanel implements ActionListener {
             }
             if(e.getSource()==btnExit){
                 btnExit.setIcon(imgPre3);
+            }
+            if(e.getSource() == btnRead){
+                btnRead.setIcon(imgPre6);
             }
         }
     }

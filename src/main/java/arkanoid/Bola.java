@@ -12,8 +12,7 @@ import javax.swing.Timer;
 public class Bola extends JLabel implements ActionListener {
     Timer timerBola;
     public boolean flagEmpezar = false;
-    int contEliminar = 0;
-    public int vel =4;
+    public int vel =4; //TODO cambiar a dooble aleatorio la velocidad y direccion
     int velocidady = -vel;
     int velocidadx = 0;
     boolean iniciarIzquierda = false;
@@ -33,9 +32,9 @@ public class Bola extends JLabel implements ActionListener {
     }
 
     public void eliminar(Component objeto) {
+        p.ladrillos.remove(objeto);
         ((Ladrillo)objeto).animacion = true;
         p.puntuacion += 10;
-        contEliminar++;
         for(int i = 0; i<p.auxScore.length;i++){
         ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num"+(String.format("%06d", p.puntuacion).charAt(i)+".png")));
         Image conversion1 = imagen1.getImage();
@@ -43,7 +42,7 @@ public class Bola extends JLabel implements ActionListener {
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             p.auxScore[i].setIcon(imgPre1);
         }
-        if(contEliminar == 88){ 
+        if(p.ladrillos.size() == 87){ 
             p.Ganar();
         }
     }
@@ -52,7 +51,6 @@ public class Bola extends JLabel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == timerBola && flagEmpezar) {
             this.setLocation(this.getX() + velocidadx, this.getY() + velocidady);
-
             // ladrillo
             for (Component component : p.getComponents()) {
                 if (component.getClass() == Ladrillo.class) {
@@ -66,6 +64,7 @@ public class Bola extends JLabel implements ActionListener {
                         velocidady = +vel;
                         eliminar(component);
                     }
+                    
                     // ladrillo-arriba
                     if (this.getY() + this.getHeight() >= component.getY()
                             && this.getY() + this.getHeight() <= component.getY() + 20
