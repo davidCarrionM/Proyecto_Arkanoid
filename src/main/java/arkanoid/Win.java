@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Win extends JPanel implements ActionListener {
-    Principal p;
     JButton btnExit;
     JButton btnMenu;
     JButton btnAgain;
@@ -68,7 +67,6 @@ public class Win extends JPanel implements ActionListener {
 
     Win(Principal a) {
         setLayout(null);
-        this.p = p;
         this.setBackground(Color.YELLOW);
         this.a = a;
         this.setBackground(Color.BLACK);

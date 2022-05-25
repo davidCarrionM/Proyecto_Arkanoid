@@ -16,6 +16,7 @@ public class Principal extends JFrame implements ActionListener{
     public  Juego juego; 
     public  GameOver gameOver;
     public  Win win;
+    public  Save save;
     static boolean eliminar = false;
 
     public Principal(){
@@ -37,8 +38,12 @@ public class Principal extends JFrame implements ActionListener{
         add(gameOver);
         win = new Win(this);
         win.setSize(1000,1000);
-        win.setVisible(true);
+        win.setVisible(false);
         add(win);
+        save = new Save(this);
+        save.setSize(1000,1000);
+        save.setVisible(true);
+        add(save);
         
     }
 
