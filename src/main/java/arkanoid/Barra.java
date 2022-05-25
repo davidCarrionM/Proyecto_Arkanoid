@@ -33,11 +33,11 @@ public class Barra extends JLabel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==timerBarraDerecha && flagBarraDerecha){
             if (p.bola.flagEmpezar) {
-                if (this.getX() + 10 <= 710-p.bola.powerCrecer) {
+                if (this.getX() + 10 <= 710-p.bola.p.powerCrecer) {
                     this.setLocation(this.getX() + movimiento, this.getY());
                 }
             } else {
-                if (this.getX() + 10 <= 710-p.bola.powerCrecer) {
+                if (this.getX() + 10 <= 710-p.bola.p.powerCrecer) {
                     this.setLocation(this.getX() + movimiento, this.getY());
                     p.bola.setLocation(p.bola.getX() + movimiento, p.bola.getY());
                 }

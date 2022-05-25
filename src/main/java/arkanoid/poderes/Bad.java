@@ -14,8 +14,8 @@ import arkanoid.Juego;
 
 public class Bad extends JLabel implements ActionListener {
     Juego p;
-    Timer timer;
-    Timer timerEmpezar;
+    public Timer timer;
+    public Timer timerEmpezar;
 
     public boolean move = false;
     boolean empezar = false;
@@ -41,7 +41,7 @@ public class Bad extends JLabel implements ActionListener {
             this.setLocation(this.getX(), this.getY()+10);
 
 
-            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130)) {
+            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130+p.powerCrecer)) {
                 for (Component componente : p.getComponents()) {
                     if(componente.getClass() == Barrera.class){
                         int random = (int)(Math.random()*3);

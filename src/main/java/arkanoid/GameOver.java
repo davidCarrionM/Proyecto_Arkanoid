@@ -20,6 +20,7 @@ public class GameOver extends JPanel implements ActionListener{
         this.setBackground(Color.BLACK);
 
         // a.remove(juego);
+        this.setVisible(true);
         btnAgain = new JButton("AGAIN");
         btnAgain.setSize(150,50);
         btnAgain.setLocation(200,500);
@@ -42,8 +43,9 @@ public class GameOver extends JPanel implements ActionListener{
         if(e.getSource() == btnAgain){
             juego = new Juego(a);
             juego.setSize(1000,1000);
+            juego.setVisible(true);
             a.add(juego);
-            Principal.juego.setVisible(true);
+            // Principal.juego.setVisible(true);
             this.setVisible(false);
         }
         

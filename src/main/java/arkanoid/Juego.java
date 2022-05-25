@@ -25,6 +25,7 @@ public class Juego extends JPanel {
     int puntuacion;
     Icon[] auxExplosion = new Icon[8];
     Principal a;
+    public int powerCrecer = 0;
 
     Juego(Principal a) {
         setLayout(null);
@@ -81,7 +82,7 @@ public class Juego extends JPanel {
                 x += 64;
             }
         }
-        bola = new Bola(this,a);
+        bola = new Bola(this);
         bola.setSize(15, 15);
         bola.setLocation(490, 875);
         // bola.setLocation(490, 200);

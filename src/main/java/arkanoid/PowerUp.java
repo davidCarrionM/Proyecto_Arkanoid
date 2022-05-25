@@ -9,12 +9,12 @@ public class PowerUp extends JLabel {
     Juego p;
     int XLadrillo;
     int YLadrillo;
-    Tall tall;
-    Low low;
-    Explote explote;
-    Bad bad;
-    Speed speed;
-    Sticky sticky;
+    public Tall tall;
+    public Low low;
+    public Explote explote;
+    public Bad bad;
+    public Speed speed;
+    public Sticky sticky;
     PowerUp(Juego p){
         this.p = p;
     }

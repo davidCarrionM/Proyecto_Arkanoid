@@ -10,12 +10,12 @@ import javax.swing.Timer;
 
 import arkanoid.Bola;
 import arkanoid.Juego;
+import arkanoid.Juego.*;
 
 public class Tall extends JLabel implements ActionListener {
     Juego p;
-    Timer timer;
-    Timer timerEmpezar;
-
+    public Timer timer;
+    public Timer timerEmpezar;
     public boolean move = false;
     boolean empezar = false;
     int cont = 0;
@@ -40,7 +40,7 @@ public class Tall extends JLabel implements ActionListener {
             this.setLocation(this.getX(), this.getY()+10);
 
 
-            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130)) {
+            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130+p.powerCrecer)) {
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;
@@ -52,7 +52,7 @@ public class Tall extends JLabel implements ActionListener {
                 p.barra.setIcon(imgPre);
                 p.barra.setSize(160, 25);
                 p.barra.setVisible(true);
-                p.bola.powerCrecer = 30; 
+                p.powerCrecer = 30;
             }
 
             if(this.getY() >= 950){
@@ -69,7 +69,7 @@ public class Tall extends JLabel implements ActionListener {
                 p.barra.setSize(130,25);
                 empezar = false;
                 cont = 0;
-                p.bola.powerCrecer = 0;
+                p.powerCrecer = 0;
                 timer.stop();
                 timerEmpezar.stop();
             }

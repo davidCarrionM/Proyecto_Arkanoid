@@ -21,17 +21,17 @@ public class Menu extends JPanel implements ActionListener {
 
         btnStart = new JButton("Start");
         btnStart.setSize(150, 50);
-        btnStart.setLocation(200, 500);
+        btnStart.setLocation(400, 500);
         btnStart.addActionListener(this);
         add(btnStart);
         btnMenu = new JButton("MENU");
         btnMenu.setSize(150, 50);
-        btnMenu.setLocation(200, 700);
+        btnMenu.setLocation(400, 600);
         btnMenu.addActionListener(this);
         add(btnMenu);
         btnExit = new JButton("EXIT");
         btnExit.setSize(150, 50);
-        btnExit.setLocation(200, 900);
+        btnExit.setLocation(400, 700);
         btnExit.addActionListener(this);
         add(btnExit);
     }

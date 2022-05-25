@@ -30,10 +30,10 @@ public class Principal extends JFrame implements ActionListener{
         menu.setSize(1000,1000);
         menu.setVisible(true);
         add(menu);
-        // gameOver = new GameOver(this);
-        // gameOver.setSize(1000,1000);
-        // gameOver.setVisible(false);
-        // add(gameOver);
+        gameOver = new GameOver(this);
+        gameOver.setSize(1000,1000);
+        gameOver.setVisible(false);
+        add(gameOver);
     }
 
     @Override
@@ -52,10 +52,11 @@ public class Principal extends JFrame implements ActionListener{
             contTiempo--;
 
 
-            // if(eliminar){
-            //     this.remove(juego);
-            //     eliminar = false;
-            // }
+            if(eliminar){
+                this.remove(juego);
+                this.juego.setVisible(false);
+                eliminar = false;
+            }
         }
         
     }

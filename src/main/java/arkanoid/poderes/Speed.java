@@ -12,9 +12,8 @@ import arkanoid.Juego;
 
 public class Speed extends JLabel implements ActionListener {
     Juego p;
-    Timer timer;
-    Timer timerEmpezar;
-
+    public Timer timer;
+    public Timer timerEmpezar;
     public boolean move = false;
     boolean empezar = false;
     int cont = 0;
@@ -39,7 +38,7 @@ public class Speed extends JLabel implements ActionListener {
             this.setLocation(this.getX(), this.getY()+10);
 
 
-            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130)) {
+            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130+p.powerCrecer)) {
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;

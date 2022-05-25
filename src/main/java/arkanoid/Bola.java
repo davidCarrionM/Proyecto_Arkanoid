@@ -7,32 +7,28 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import arkanoid.Principal;
 public class Bola extends JLabel implements ActionListener {
     Timer timerBola;
     public boolean flagEmpezar = false;
     int contEliminar = 0;
-    int velocidady = -4;
+    public int vel =4;
+    int velocidady = -vel;
     int velocidadx = 0;
     boolean iniciarIzquierda = false;
     boolean iniciarDerecha = false;
     Juego p;
-    public int vel =4;
-    public int powerCrecer = 0;
     ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/bola.png"));
     Image conversion = imagen.getImage();
     Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
     ImageIcon imgPre = new ImageIcon(tamaño);
-    Principal a;
-
-    Bola(Juego p,Principal a) {
+    // Principal a;
+    Bola(Juego p) {
         timerBola = new Timer(15, this);
         timerBola.start();
         this.p = p;
-        this.a = a;
+        // this.a = a;
         this.setIcon(imgPre);
     }
 
@@ -115,28 +111,25 @@ public class Bola extends JLabel implements ActionListener {
                 System.out.println("GAME OVER");
                 flagEmpezar = false;
                 p.puntuacion = 0;
-                a.gameOver = new GameOver(a);
-                a.gameOver.setSize(1000,1000);
-                a.gameOver.setVisible(true);
-                a.add(a.gameOver);
-                a.juego.setVisible(false);
-                // Principal.eliminar = true;              
-            }
+                Principal.gameOver.setVisible(true);
+                p.setVisible(false);
+                p.removeAll();
+            }         
             // barra derecha
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 100
-                    && this.getX() <= (p.barra.getX() + 120+powerCrecer)) {
+                    && this.getX() <= (p.barra.getX() + 120+p.powerCrecer)) {
                 velocidady = -vel;
                 velocidadx = +2;
             }
             // barra izquierda
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() - 10
-                    && this.getX() <= (p.barra.getX() + 20+powerCrecer)) {
+                    && this.getX() <= (p.barra.getX() + 20+p.powerCrecer)) {
                 velocidady = -vel;
                 velocidadx = -2;
             }
             // barra centro
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 21
-                    && this.getX() <= (p.barra.getX() + 109+powerCrecer)) {
+                    && this.getX() <= (p.barra.getX() + 109+p.powerCrecer)) {
                 velocidady = -vel;
             }
             // techo
