@@ -17,6 +17,7 @@ public class Win extends JPanel implements ActionListener {
     JButton btnAgain;
     Juego juego;
     JLabel highScore;
+    JLabel score;
     JButton btnSave;
     JLabel lblWin;
     Principal a;
@@ -109,7 +110,7 @@ public class Win extends JPanel implements ActionListener {
         btnExit.setContentAreaFilled(false);
         btnExit.addMouseListener(new MouseEvent());
         add(btnExit);
-        ImageIcon imagen0 = new ImageIcon(HighScore.class.getResource("/arkanoid/img/highscore.jpg"));
+        ImageIcon imagen0 = new ImageIcon(HighScore.class.getResource("/arkanoid/img/highscore.png"));
         Image conversion0 = imagen0.getImage();
         Image tamaño0 = conversion0.getScaledInstance(270, 100, Image.SCALE_SMOOTH);
         ImageIcon imgPre0 = new ImageIcon(tamaño0);
@@ -118,6 +119,15 @@ public class Win extends JPanel implements ActionListener {
         highScore.setLocation(480, 30);
         highScore.setIcon(imgPre0);
         add(highScore);
+        ImageIcon imagen = new ImageIcon(Score.class.getResource("/arkanoid/img/score.png"));
+        Image conversion = imagen.getImage();
+        Image tamaño = conversion.getScaledInstance(200, 70, Image.SCALE_SMOOTH);
+        ImageIcon imgPre = new ImageIcon(tamaño);
+        score = new JLabel();
+        score.setSize(200, 70);
+        score.setLocation(250, 40);
+        score.setIcon(imgPre);
+        add(score);
         btnSave = new JButton("SAVE");
         btnSave.setSize(200, 90);
         btnSave.setLocation(50 , 50);
