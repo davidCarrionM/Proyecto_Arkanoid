@@ -74,6 +74,7 @@ public class GameOver extends JPanel implements ActionListener{
         btnMenu.setIcon(imgPre6);
         btnMenu.addMouseListener(new MouseEvent());
         add(btnMenu);
+
         btnExit = new JButton("EXIT");
         btnExit.setSize(220,50);
         btnExit.setLocation(690,700);
@@ -97,7 +98,7 @@ public class GameOver extends JPanel implements ActionListener{
                 btnExit.setIcon(imgPre5);
             }
             if(e.getSource()==btnMenu){
-                btnMenu.setIcon(imagen7);
+                btnMenu.setIcon(imgPre7);
             }
         }
         @Override
@@ -109,7 +110,7 @@ public class GameOver extends JPanel implements ActionListener{
                 btnExit.setIcon(imgPre3);
             }
             if(e.getSource()==btnMenu){
-                btnMenu.setIcon(imagen6);
+                btnMenu.setIcon(imgPre6);
             }
         }
     }
