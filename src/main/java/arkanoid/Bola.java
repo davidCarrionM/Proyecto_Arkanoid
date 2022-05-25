@@ -43,6 +43,9 @@ public class Bola extends JLabel implements ActionListener {
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             p.auxScore[i].setIcon(imgPre1);
         }
+        if(contEliminar == 88){ 
+            p.Ganar();
+        }
     }
 
     @Override
@@ -108,12 +111,7 @@ public class Bola extends JLabel implements ActionListener {
 
             // Perder
             if (this.getY() >= 1000) {
-                System.out.println("GAME OVER");
-                flagEmpezar = false;
-                p.puntuacion = 0;
-                Principal.gameOver.setVisible(true);
-                p.setVisible(false);
-                p.removeAll();
+                p.Perder();
             }         
             // barra derecha
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 100

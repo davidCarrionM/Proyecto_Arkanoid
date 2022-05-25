@@ -12,9 +12,10 @@ public class Principal extends JFrame implements ActionListener{
     int contTiempo = 0;
     String titulo = "Arkanoid";
     String tituloAux = "";
-    public static Menu menu;
-    public static Juego juego;
-    public static GameOver gameOver;
+    public  Menu menu;
+    public  Juego juego; 
+    public  GameOver gameOver;
+    public  Win win;
     static boolean eliminar = false;
 
     public Principal(){
@@ -28,12 +29,17 @@ public class Principal extends JFrame implements ActionListener{
         add(juego);
         menu = new Menu(this);
         menu.setSize(1000,1000);
-        menu.setVisible(true);
+        menu.setVisible(false);
         add(menu);
         gameOver = new GameOver(this);
         gameOver.setSize(1000,1000);
-        gameOver.setVisible(false);
+        gameOver.setVisible(true);
         add(gameOver);
+        win = new Win(this);
+        win.setSize(1000,1000);
+        win.setVisible(false);
+        add(win);
+        
     }
 
     @Override

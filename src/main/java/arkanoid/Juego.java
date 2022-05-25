@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 public class Juego extends JPanel {
     JLabel lblFondo;
     NumPuntuacion[] auxScore = new NumPuntuacion[6];
@@ -27,11 +26,30 @@ public class Juego extends JPanel {
     Principal a;
     public int powerCrecer = 0;
 
+    public void Ganar() {
+        System.out.println("GANASTE");
+        bola.flagEmpezar = false;
+        this.puntuacion = 0;
+        a.win.setVisible(true);
+        this.setVisible(false);
+        this.removeAll();
+    }
+    
+    public void Perder() {
+        System.out.println("GAME OVER");
+        bola.flagEmpezar = false;
+        this.puntuacion = 0;
+        a.gameOver.setVisible(true);
+        this.setVisible(false);
+        this.removeAll();
+    }
+    
+
     Juego(Principal a) {
         setLayout(null);
         this.setFocusable(true);
         this.grabFocus();
-        this.a=a;
+        this.a = a;
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(new movimientoKey());
@@ -41,7 +59,7 @@ public class Juego extends JPanel {
         barra.setSize(130, 25);
         barra.setLocation(430, 900);
         add(barra);
-        
+
         powerUp = new PowerUp(this);
         add(powerUp);
 
@@ -51,10 +69,9 @@ public class Juego extends JPanel {
             barrera = new Barrera(this);
             barrera.setSize(50, 10);
             barrera.setLocation(x1, y1);
-            this.add(barrera);
+            // this.add(barrera);
             x1 += 60;
         }
-
 
         int x2 = 305;
         int y2 = 95;
@@ -115,7 +132,6 @@ public class Juego extends JPanel {
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxExplosion[i] = imgPre1;
         }
-        
 
     }
 
