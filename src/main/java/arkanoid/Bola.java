@@ -12,7 +12,7 @@ import javax.swing.Timer;
 public class Bola extends JLabel implements ActionListener {
     Timer timerBola;
     public boolean flagEmpezar = false;
-    public int vel =4; //TODO cambiar a dooble aleatorio la velocidad y direccion
+    public int vel = 4; // TODO cambiar a dooble aleatorio la velocidad y direccion
     int velocidady = -vel;
     int velocidadx = 0;
     boolean iniciarIzquierda = false;
@@ -22,6 +22,7 @@ public class Bola extends JLabel implements ActionListener {
     Image conversion = imagen.getImage();
     Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
     ImageIcon imgPre = new ImageIcon(tamaño);
+
     // Principal a;
     Bola(Juego p) {
         timerBola = new Timer(15, this);
@@ -33,16 +34,11 @@ public class Bola extends JLabel implements ActionListener {
 
     public void eliminar(Component objeto) {
         p.ladrillos.remove(objeto);
-        ((Ladrillo)objeto).animacion = true;
-        p.puntuacion += 10;
-        for(int i = 0; i<p.auxScore.length;i++){
-        ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num"+(String.format("%06d", p.puntuacion).charAt(i)+".png")));
-        Image conversion1 = imagen1.getImage();
-            Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-            ImageIcon imgPre1 = new ImageIcon(tamaño1);
-            p.auxScore[i].setIcon(imgPre1);
-        }
-        if(p.ladrillos.size() == 87){ 
+        ((Ladrillo) objeto).animacion = true;
+        Statics.puntuacion += 10;
+        p.score();
+        
+        if (p.ladrillos.size() == 86) {
             p.Ganar();
         }
     }
@@ -64,7 +60,7 @@ public class Bola extends JLabel implements ActionListener {
                         velocidady = +vel;
                         eliminar(component);
                     }
-                    
+
                     // ladrillo-arriba
                     if (this.getY() + this.getHeight() >= component.getY()
                             && this.getY() + this.getHeight() <= component.getY() + 20
@@ -111,22 +107,22 @@ public class Bola extends JLabel implements ActionListener {
             // Perder
             if (this.getY() >= 1000) {
                 p.Perder();
-            }         
+            }
             // barra derecha
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 100
-                    && this.getX() <= (p.barra.getX() + 120+p.powerCrecer)) {
+                    && this.getX() <= (p.barra.getX() + 120 + p.powerCrecer)) {
                 velocidady = -vel;
                 velocidadx = +2;
             }
             // barra izquierda
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() - 10
-                    && this.getX() <= (p.barra.getX() + 20+p.powerCrecer)) {
+                    && this.getX() <= (p.barra.getX() + 20 + p.powerCrecer)) {
                 velocidady = -vel;
                 velocidadx = -2;
             }
             // barra centro
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 21
-                    && this.getX() <= (p.barra.getX() + 109+p.powerCrecer)) {
+                    && this.getX() <= (p.barra.getX() + 109 + p.powerCrecer)) {
                 velocidady = -vel;
             }
             // techo

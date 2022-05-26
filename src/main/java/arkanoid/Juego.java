@@ -13,38 +13,50 @@ import javax.swing.JPanel;
 
 public class Juego extends JPanel {
     JLabel lblFondo;
-    NumPuntuacion[] auxScore = new NumPuntuacion[6];
-    Score score;
-    HighScore highScore;
+    JLabel score;
+    JLabel highScore;
     public Barra barra;
     Barrera barrera;
     Ladrillo ladrillo;
     PowerUp powerUp;
     public Bola bola;
-    NumPuntuacion numPuntuacion;
     int puntuacion;
     Icon[] auxExplosion = new Icon[8];
     Principal a;
     public int powerCrecer = 0;
+    public  JLabel numPuntuacion;
+    public  JLabel[] auxScore = new JLabel[6];
     ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
 
     public void Ganar() {
         System.out.println("GANASTE");
         bola.flagEmpezar = false;
-        this.puntuacion = 0;
         a.win.setVisible(true);
         this.setVisible(false);
         this.removeAll();
+    }
+
+    public void score() {
+        for (int i = 0; i < 6; i++) {
+            ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num" + (String.format("%06d", Statics.puntuacion).charAt(i) + ".png")));
+            Image conversion1 = imagen1.getImage();
+            Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+            ImageIcon imgPre1 = new ImageIcon(tamaño1);
+            auxScore[i].setIcon(imgPre1);
+        }
     }
     
     public void Perder() {
         System.out.println("GAME OVER");
         bola.flagEmpezar = false;
-        this.puntuacion = 0;
         a.gameOver.setVisible(true);
+        a.gameOver.score();
         this.setVisible(false);
         this.removeAll();
+        System.err.println("Puntuacion"+Statics.puntuacion);
+
     }
+
     
 
     Juego(Principal a) {
@@ -56,7 +68,6 @@ public class Juego extends JPanel {
         this.setFocusable(true);
         this.addKeyListener(new movimientoKey());
         int cont = 0;
-        int puntuacion = 0;
         barra = new Barra(this);
         barra.setSize(130, 25);
         barra.setLocation(430, 900);
@@ -71,17 +82,23 @@ public class Juego extends JPanel {
             barrera = new Barrera(this);
             barrera.setSize(50, 10);
             barrera.setLocation(x1, y1);
-            this.add(barrera);
+            // this.add(barrera);
             x1 += 60;
         }
+        ImageIcon imagen = new ImageIcon(Juego.class.getResource("/arkanoid/img/num0.png"));
+        Image conversion = imagen.getImage();
+        Image tamaño = conversion.getScaledInstance(16, 20, Image.SCALE_SMOOTH);
+        ImageIcon imgPre = new ImageIcon(tamaño);
 
         int x2 = 305;
         int y2 = 95;
         for (int i = 0; i < 6; i++) {
-            numPuntuacion = new NumPuntuacion(this);
+            numPuntuacion = new JLabel();
             numPuntuacion.setSize(16, 20);
             numPuntuacion.setLocation(x2, y2);
             auxScore[i] = numPuntuacion;
+            numPuntuacion.setIcon(imgPre);;
+            
             add(numPuntuacion);
             x2 += 20;
         }
@@ -108,25 +125,34 @@ public class Juego extends JPanel {
         bola.setLocation(490, 875);
         // bola.setLocation(490, 200);
         add(bola);
-
-        score = new Score(this);
+        ImageIcon imagen2 = new ImageIcon(Save.class.getResource("/arkanoid/img/score.png"));
+        Image conversion2 = imagen2.getImage();
+        Image tamaño2 = conversion2.getScaledInstance(200, 70, Image.SCALE_SMOOTH);
+        ImageIcon imgPre2= new ImageIcon(tamaño2);
+        score = new JLabel();
         score.setSize(200, 70);
         score.setLocation(250, 40);
+        score.setIcon(imgPre2);
         add(score);
 
-        highScore = new HighScore(this);
+        ImageIcon imagen0 = new ImageIcon(Juego.class.getResource("/arkanoid/img/highscore.png"));
+        Image conversion0 = imagen0.getImage();
+        Image tamaño0 = conversion0.getScaledInstance(270, 100, Image.SCALE_SMOOTH);
+        ImageIcon imgPre0 = new ImageIcon(tamaño0);
+        highScore = new JLabel();
         highScore.setSize(270, 100);
         highScore.setLocation(480, 30);
+        highScore.setIcon(imgPre0);;
         add(highScore);
 
-        ImageIcon imagen = new ImageIcon(Juego.class.getResource("/arkanoid/img/fondoJugable.png"));
-        Image conversion = imagen.getImage();
-        Image tamaño = conversion.getScaledInstance(750, 810, Image.SCALE_SMOOTH);
-        ImageIcon imgPre = new ImageIcon(tamaño);
+        ImageIcon imagen6 = new ImageIcon(Juego.class.getResource("/arkanoid/img/fondoJugable.png"));
+        Image conversion6 = imagen6.getImage();
+        Image tamaño6 = conversion6.getScaledInstance(750, 810, Image.SCALE_SMOOTH);
+        ImageIcon imgPre6 = new ImageIcon(tamaño6);
         lblFondo = new JLabel();
         lblFondo.setSize(750, 810);
         lblFondo.setLocation(120, 150);
-        lblFondo.setIcon(imgPre);
+        lblFondo.setIcon(imgPre6);
         add(lblFondo);
 
         for (int i = 0; i < 8; i++) {

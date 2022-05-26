@@ -30,7 +30,7 @@ public class Principal extends JFrame implements ActionListener{
         add(juego);
         menu = new Menu(this);
         menu.setSize(1000,1000);
-        menu.setVisible(false);
+        menu.setVisible(true);
         add(menu);
         gameOver = new GameOver(this);
         gameOver.setSize(1000,1000);
@@ -42,9 +42,8 @@ public class Principal extends JFrame implements ActionListener{
         add(win);
         save = new Save(this);
         save.setSize(1000,1000);
-        save.setVisible(true);
+        save.setVisible(false);
         add(save);
-        
     }
 
     @Override

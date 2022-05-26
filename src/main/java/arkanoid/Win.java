@@ -16,6 +16,7 @@ public class Win extends JPanel implements ActionListener {
     JButton btnMenu;
     JButton btnAgain;
     Juego juego;
+    Save save;
     JLabel highScore;
     JLabel score;
     JButton btnSave;
@@ -58,12 +59,12 @@ public class Win extends JPanel implements ActionListener {
 
     ImageIcon imagen9 = new ImageIcon(Menu.class.getResource("/arkanoid/img/save.png"));
     Image conversion9 = imagen9.getImage();
-    Image tamaño9 = conversion9.getScaledInstance(200, 90, Image.SCALE_SMOOTH);
+    Image tamaño9 = conversion9.getScaledInstance(160, 40, Image.SCALE_SMOOTH);
     ImageIcon imgPre9 = new ImageIcon(tamaño9);
 
     ImageIcon imagen10 = new ImageIcon(Menu.class.getResource("/arkanoid/img/save+.png"));
     Image conversion10 = imagen10.getImage();
-    Image tamaño10 = conversion10.getScaledInstance(200, 90, Image.SCALE_SMOOTH);
+    Image tamaño10 = conversion10.getScaledInstance(160, 40, Image.SCALE_SMOOTH);
     ImageIcon imgPre10 = new ImageIcon(tamaño10);
 
     Win(Principal a) {
@@ -110,7 +111,7 @@ public class Win extends JPanel implements ActionListener {
         btnExit.setContentAreaFilled(false);
         btnExit.addMouseListener(new MouseEvent());
         add(btnExit);
-        ImageIcon imagen0 = new ImageIcon(HighScore.class.getResource("/arkanoid/img/highscore.png"));
+        ImageIcon imagen0 = new ImageIcon(Win.class.getResource("/arkanoid/img/highscore.png"));
         Image conversion0 = imagen0.getImage();
         Image tamaño0 = conversion0.getScaledInstance(270, 100, Image.SCALE_SMOOTH);
         ImageIcon imgPre0 = new ImageIcon(tamaño0);
@@ -119,7 +120,7 @@ public class Win extends JPanel implements ActionListener {
         highScore.setLocation(480, 30);
         highScore.setIcon(imgPre0);
         add(highScore);
-        ImageIcon imagen = new ImageIcon(Score.class.getResource("/arkanoid/img/score.png"));
+        ImageIcon imagen = new ImageIcon(Save.class.getResource("/arkanoid/img/score.png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(200, 70, Image.SCALE_SMOOTH);
         ImageIcon imgPre = new ImageIcon(tamaño);
@@ -129,8 +130,8 @@ public class Win extends JPanel implements ActionListener {
         score.setIcon(imgPre);
         add(score);
         btnSave = new JButton("SAVE");
-        btnSave.setSize(200, 90);
-        btnSave.setLocation(50 , 50);
+        btnSave.setSize(160, 40);
+        btnSave.setLocation(40 , 50);
         btnSave.addActionListener(this);
         btnSave.setFocusPainted(false);
         btnSave.setBorderPainted(false);
@@ -192,6 +193,14 @@ public class Win extends JPanel implements ActionListener {
         }
         if (e.getSource() == btnExit) {
             System.exit(0);
+        }
+        if(e.getSource() == btnSave){
+            save = new Save(a);
+            save.setSize(1000, 1000);
+            save.setVisible(true);
+            a.add(save);
+            save.winOver = true;
+            this.setVisible(false);
         }
     }
 }
