@@ -32,6 +32,8 @@ public class Juego extends JPanel {
         System.out.println("GANASTE");
         bola.flagEmpezar = false;
         a.win.setVisible(true);
+        a.win.score();
+
         this.setVisible(false);
         this.removeAll();
     }

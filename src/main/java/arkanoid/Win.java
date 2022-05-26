@@ -22,6 +22,10 @@ public class Win extends JPanel implements ActionListener {
     JButton btnSave;
     JLabel lblWin;
     Principal a;
+
+      JLabel numPuntuacion;
+      JLabel[] auxScore = new JLabel[6];
+
     ImageIcon imagen2 = new ImageIcon(Menu.class.getResource("/arkanoid/img/play.png"));
     Image conversion2 = imagen2.getImage();
     Image tamaño2 = conversion2.getScaledInstance(220, 60, Image.SCALE_SMOOTH);
@@ -66,6 +70,16 @@ public class Win extends JPanel implements ActionListener {
     Image conversion10 = imagen10.getImage();
     Image tamaño10 = conversion10.getScaledInstance(160, 40, Image.SCALE_SMOOTH);
     ImageIcon imgPre10 = new ImageIcon(tamaño10);
+
+    public void score() {
+        for (int i = 0; i < 6; i++) {
+            ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num" + (String.format("%06d", Statics.puntuacion).charAt(i) + ".png")));
+            Image conversion1 = imagen1.getImage();
+            Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+            ImageIcon imgPre1 = new ImageIcon(tamaño1);
+            auxScore[i].setIcon(imgPre1);
+        }
+    }
 
     Win(Principal a) {
         setLayout(null);
@@ -139,7 +153,25 @@ public class Win extends JPanel implements ActionListener {
         btnSave.setIcon(imgPre9);
         btnSave.addMouseListener(new MouseEvent());
         add(btnSave);
+        ImageIcon imagen13 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/num0.png"));
+        Image conversion13 = imagen13.getImage();
+        Image tamaño13 = conversion13.getScaledInstance(16, 20, Image.SCALE_SMOOTH);
+        ImageIcon imgPre13 = new ImageIcon(tamaño13);
+       
+       int x2 = 305;
+       int y2 = 95;
+       
+        for (int i = 0; i < 6; i++) {
 
+            numPuntuacion = new JLabel();
+            numPuntuacion.setSize(16, 20);
+            numPuntuacion.setLocation(x2, y2);
+            auxScore[i] = numPuntuacion;
+            numPuntuacion.setIcon(imgPre13);
+            add(numPuntuacion);
+            x2 += 20;
+     
+        }
     }
 
     public class MouseEvent extends MouseAdapter {
