@@ -2,6 +2,8 @@ package arkanoid;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -10,13 +12,15 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class Juego extends JPanel {
+public class Juego extends JPanel implements ActionListener {
     JLabel lblFondo;
     JLabel score;
     JLabel highScore;
     public Barra barra;
     Barrera barrera;
+    Timer tiempo;
     Ladrillo ladrillo;
     PowerUp powerUp;
     public Bola bola;
@@ -24,8 +28,8 @@ public class Juego extends JPanel {
     Icon[] auxExplosion = new Icon[8];
     Principal a;
     public int powerCrecer = 0;
-    public  JLabel numPuntuacion;
-    public  JLabel[] auxScore = new JLabel[6];
+    public JLabel numPuntuacion;
+    public JLabel[] auxScore = new JLabel[6];
     ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
 
     public void Ganar() {
@@ -33,6 +37,7 @@ public class Juego extends JPanel {
         bola.flagEmpezar = false;
         a.win.setVisible(true);
         a.win.score();
+        this.tiempo.stop();
 
         this.setVisible(false);
         this.removeAll();
@@ -40,14 +45,15 @@ public class Juego extends JPanel {
 
     public void score() {
         for (int i = 0; i < 6; i++) {
-            ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num" + (String.format("%06d", Statics.puntuacion).charAt(i) + ".png")));
+            ImageIcon imagen1 = new ImageIcon(Bola.class
+                    .getResource("/arkanoid/img/num" + (String.format("%06d", Statics.puntuacion).charAt(i) + ".png")));
             Image conversion1 = imagen1.getImage();
             Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxScore[i].setIcon(imgPre1);
         }
     }
-    
+
     public void Perder() {
         System.out.println("GAME OVER");
         bola.flagEmpezar = false;
@@ -55,13 +61,14 @@ public class Juego extends JPanel {
         a.gameOver.score();
         this.setVisible(false);
         this.removeAll();
-        System.err.println("Puntuacion"+Statics.puntuacion);
+        this.tiempo.stop();
+        System.err.println("Puntuacion" + Statics.puntuacion);
 
     }
 
-    
-
     Juego(Principal a) {
+        Statics.time = 0;
+
         setLayout(null);
         this.setFocusable(true);
         this.grabFocus();
@@ -99,8 +106,9 @@ public class Juego extends JPanel {
             numPuntuacion.setSize(16, 20);
             numPuntuacion.setLocation(x2, y2);
             auxScore[i] = numPuntuacion;
-            numPuntuacion.setIcon(imgPre);;
-            
+            numPuntuacion.setIcon(imgPre);
+            ;
+
             add(numPuntuacion);
             x2 += 20;
         }
@@ -130,7 +138,7 @@ public class Juego extends JPanel {
         ImageIcon imagen2 = new ImageIcon(Save.class.getResource("/arkanoid/img/score.png"));
         Image conversion2 = imagen2.getImage();
         Image tamaño2 = conversion2.getScaledInstance(200, 70, Image.SCALE_SMOOTH);
-        ImageIcon imgPre2= new ImageIcon(tamaño2);
+        ImageIcon imgPre2 = new ImageIcon(tamaño2);
         score = new JLabel();
         score.setSize(200, 70);
         score.setLocation(250, 40);
@@ -144,7 +152,7 @@ public class Juego extends JPanel {
         highScore = new JLabel();
         highScore.setSize(270, 100);
         highScore.setLocation(480, 30);
-        highScore.setIcon(imgPre0);;
+        highScore.setIcon(imgPre0);
         add(highScore);
 
         ImageIcon imagen6 = new ImageIcon(Juego.class.getResource("/arkanoid/img/fondoJugable.png"));
@@ -164,6 +172,9 @@ public class Juego extends JPanel {
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxExplosion[i] = imgPre1;
         }
+
+        tiempo = new Timer(1000, this);
+        tiempo.start();
 
     }
 
@@ -216,5 +227,13 @@ public class Juego extends JPanel {
             }
         }
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == tiempo) {
+            Statics.time +=1;
+            System.err.println("tiempo Juego"+Statics.time);
+        }
     }
 }

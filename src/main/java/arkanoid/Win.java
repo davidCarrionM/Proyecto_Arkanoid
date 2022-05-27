@@ -78,6 +78,8 @@ public class Win extends JPanel implements ActionListener {
             Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxScore[i].setIcon(imgPre1);
+            System.err.println(Statics.time);
+
         }
     }
 
@@ -216,7 +218,10 @@ public class Win extends JPanel implements ActionListener {
             juego.setSize(1000, 1000);
             juego.setVisible(true);
             a.add(juego);
-            // Principal.juego.setVisible(true);
+            Statics.puntuacion = 0;
+            Statics.time = 0;
+            juego=null;
+
             this.setVisible(false);
         }
         if (e.getSource() == btnMenu) {
@@ -230,8 +235,10 @@ public class Win extends JPanel implements ActionListener {
             save = new Save(a);
             save.setSize(1000, 1000);
             save.setVisible(true);
-            a.add(save);
             save.winOver = true;
+            save.score();
+            a.add(save);
+            save = null;
             this.setVisible(false);
         }
     }

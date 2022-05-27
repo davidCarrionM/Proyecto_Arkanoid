@@ -24,13 +24,9 @@ public class Principal extends JFrame implements ActionListener{
 
         tiempo = new Timer(300, this);
         tiempo.start();
-        juego = new Juego(this);
-        juego.setSize(1000,1000);
-        juego.setVisible(false);
-        add(juego);
         menu = new Menu(this);
         menu.setSize(1000,1000);
-        menu.setVisible(true);
+        menu.setVisible(false);
         add(menu);
         gameOver = new GameOver(this);
         gameOver.setSize(1000,1000);
@@ -42,7 +38,7 @@ public class Principal extends JFrame implements ActionListener{
         add(win);
         save = new Save(this);
         save.setSize(1000,1000);
-        save.setVisible(false);
+        save.setVisible(true);
         add(save);
     }
 

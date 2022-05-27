@@ -11,9 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Save extends JPanel implements ActionListener{
+public class Save extends JPanel implements ActionListener {
     JButton letra;
     JButton back;
+    JButton del;
+    JButton send;
+    String finalName;
     JLabel vacio;
     Principal a;
     JLabel highScore;
@@ -21,6 +24,10 @@ public class Save extends JPanel implements ActionListener{
     JLabel name;
     JLabel nameRegis;
     boolean winOver;
+    int cont = 0;
+    public JLabel numPuntuacion;
+    public JLabel[] auxScore = new JLabel[6];
+    public JLabel[] auxVacio = new JLabel[10];
     ImageIcon imagen4 = new ImageIcon(Ladrillo.class.getResource("/arkanoid/img/back.png"));
     Image conversion4 = imagen4.getImage();
     Image tamaño4 = conversion4.getScaledInstance(200, 40, Image.SCALE_SMOOTH);
@@ -29,6 +36,21 @@ public class Save extends JPanel implements ActionListener{
     Image conversion5 = imagen5.getImage();
     Image tamaño5 = conversion5.getScaledInstance(200, 40, Image.SCALE_SMOOTH);
     ImageIcon imgPre5 = new ImageIcon(tamaño5);
+    ImageIcon imagen1 = new ImageIcon(Save.class.getResource("/arkanoid/img/vacio.png"));
+    Image conversion1 = imagen1.getImage();
+    Image tamaño1 = conversion1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+    ImageIcon imgPre1 = new ImageIcon(tamaño1);
+
+    public void score() {
+        for (int i = 0; i < 6; i++) {
+            ImageIcon imagen1 = new ImageIcon(Bola.class
+                    .getResource("/arkanoid/img/num" + (String.format("%06d", Statics.puntuacion).charAt(i) + ".png")));
+            Image conversion1 = imagen1.getImage();
+            Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+            ImageIcon imgPre1 = new ImageIcon(tamaño1);
+            auxScore[i].setIcon(imgPre1);
+        }
+    }
 
     public Save(Principal a) {
         this.setLayout(null);
@@ -38,15 +60,12 @@ public class Save extends JPanel implements ActionListener{
         int x1 = 330;
         int y1 = 350;
         for (int i = 0; i < 10; i++) {
-            ImageIcon imagen1 = new ImageIcon(Save.class.getResource("/arkanoid/img/vacio.png"));
-            Image conversion1 = imagen1.getImage();
-            Image tamaño1 = conversion1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-            ImageIcon imgPre1 = new ImageIcon(tamaño1);
             vacio = new JLabel();
             vacio.setSize(50, 50);
             vacio.setLocation(x1, y1);
             vacio.setIcon(imgPre1);
             this.add(vacio);
+            auxVacio[i] = vacio;
             x1 += 55;
         }
         ImageIcon imagen2 = new ImageIcon(Save.class.getResource("/arkanoid/img/name.png"));
@@ -98,7 +117,8 @@ public class Save extends JPanel implements ActionListener{
             letra.setSize(50, 50);
             letra.setLocation(x, y);
             letra.setIcon(imgPre1);
-            letra.setActionCommand(i + "1");
+            letra.setActionCommand(i + "");
+            letra.addActionListener(this);
             this.add(letra);
 
             if ((i + 1) % 8 == 0) {
@@ -108,7 +128,7 @@ public class Save extends JPanel implements ActionListener{
                 x += 70;
             }
         }
-        
+
         back = new JButton();
         back.setSize(200, 40);
         back.setLocation(50, 70);
@@ -119,6 +139,51 @@ public class Save extends JPanel implements ActionListener{
         back.addMouseListener(new MouseEvent());
         back.addActionListener(this);
         this.add(back);
+
+        ImageIcon imagen1 = new ImageIcon(Save.class.getResource("/arkanoid/img/del.png"));
+        Image conversion1 = imagen1.getImage();
+        Image tamaño1 = conversion1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon imgPre1 = new ImageIcon(tamaño1);
+        del = new JButton();
+        del.setSize(50, 50);
+        del.setLocation(780, 660);
+        del.setIcon(imgPre1);
+        del.addMouseListener(new MouseEvent());
+        del.addActionListener(this);
+        this.add(del);
+
+        ImageIcon imagen5 = new ImageIcon(Save.class.getResource("/arkanoid/img/send.png"));
+        Image conversion5 = imagen5.getImage();
+        Image tamaño5 = conversion5.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon imgPre5 = new ImageIcon(tamaño5);
+        send = new JButton();
+        send.setSize(50, 50);
+        send.setLocation(780, 580);
+        send.setIcon(imgPre5);
+        send.addMouseListener(new MouseEvent());
+        send.addActionListener(this);
+        this.add(send);
+
+        ImageIcon imagen13 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/num0.png"));
+        Image conversion13 = imagen13.getImage();
+        Image tamaño13 = conversion13.getScaledInstance(16, 20, Image.SCALE_SMOOTH);
+        ImageIcon imgPre13 = new ImageIcon(tamaño13);
+
+        int x2 = 305;
+        int y2 = 95;
+
+        // + (String.format("%06d", Statics.puntuacion).charAt(i) +
+        for (int i = 0; i < 6; i++) {
+
+            numPuntuacion = new JLabel();
+            numPuntuacion.setSize(16, 20);
+            numPuntuacion.setLocation(x2, y2);
+            auxScore[i] = numPuntuacion;
+            numPuntuacion.setIcon(imgPre13);
+            add(numPuntuacion);
+            x2 += 20;
+
+        }
     }
 
     public class MouseEvent extends MouseAdapter {
@@ -141,16 +206,57 @@ public class Save extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == back) {
-            if(winOver){
+            if (winOver) {
                 a.win.setVisible(true);
-            }else{
+            } else {
                 a.gameOver.setVisible(true);
             }
             this.setVisible(false);
             a.remove(a.save);
             this.removeAll();
+        }
+
+        if (e.getSource().getClass() == JButton.class) {
+            if (e.getSource() != back && e.getSource() != del && e.getSource() != send) {
+                if (cont < 10 && cont >= 0) {
+                    ImageIcon imagen13 = new ImageIcon(
+                            GameOver.class.getResource("/arkanoid/img/letra" + e.getActionCommand() + ".png"));
+                    Image conversion13 = imagen13.getImage();
+                    Image tamaño13 = conversion13.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                    ImageIcon imgPre13 = new ImageIcon(tamaño13);
+                    auxVacio[cont].setIcon(imgPre13);
+                    
+                }
+                if (cont < 10) {
+
+                    cont++;
+                }
+            }
+            if (e.getSource() == del && cont > 0) {
+                cont--;
+                auxVacio[cont].setIcon(imgPre1);
+            }
+
+            if (e.getSource() == send) {
+            //     for (int i = 0; i < 10; i++) {
+                    
+            //         if((Integer.parseInt(auxVacio.))+81>=81 && (Integer.parseInt(e.getActionCommand()))+81<107){
+            //             System.err.println("LETRA");
+            //         }
+            //     }
+             
+            //     }
+            // }
+            // if (e.getSource().getClass() == JButton.class) {
+            //     if (e.getSource() != back && e.getSource() != del && e.getSource() != send) {
+            //         if((Integer.parseInt(e.getActionCommand()))+81>=81 && (Integer.parseInt(e.getActionCommand()))+81<107){
+            //             System.err.println("LETRA");
+            //         }
+             
+            //     }
+            // }
 
         }
-        
+
     }
 }

@@ -78,6 +78,7 @@ public class GameOver extends JPanel implements ActionListener {
             Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxScore[i].setIcon(imgPre1);
+            System.err.println("Tiempo = "+ Statics.time);
         }
     }
 
@@ -216,11 +217,13 @@ public class GameOver extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAgain) {
+            Statics.puntuacion = 0;
             juego = new Juego(a);
             juego.setSize(1000, 1000);
             juego.setVisible(true);
             a.add(juego);
-            // Principal.juego.setVisible(true);
+            juego=null;
+
             this.setVisible(false);
         }
         if (e.getSource() == btnMenu) {
@@ -235,7 +238,9 @@ public class GameOver extends JPanel implements ActionListener {
             save.setSize(1000, 1000);
             save.setVisible(true);
             save.winOver = false;
+            save.score();
             a.add(save);
+            save = null;
             this.setVisible(false);
         }
     }

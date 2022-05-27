@@ -146,6 +146,9 @@ public class Menu extends JPanel implements ActionListener {
             juego.setSize(1000, 1000);
             juego.setVisible(true);
             a.add(juego);
+            juego=null;
+            Statics.puntuacion = 0;
+            Statics.time = 0;
             this.setVisible(false);
         }
         if (e.getSource() == btnExit) {
