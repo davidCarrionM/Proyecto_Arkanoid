@@ -55,14 +55,12 @@ public class Juego extends JPanel implements ActionListener {
     }
 
     public void Perder() {
-        System.out.println("GAME OVER");
         bola.flagEmpezar = false;
         a.gameOver.setVisible(true);
         a.gameOver.score();
         this.setVisible(false);
-        this.removeAll();
         this.tiempo.stop();
-        System.err.println("Puntuacion" + Statics.puntuacion);
+        this.removeAll();
 
     }
 

@@ -5,10 +5,16 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Save extends JPanel implements ActionListener {
@@ -16,11 +22,14 @@ public class Save extends JPanel implements ActionListener {
     JButton back;
     JButton del;
     JButton send;
-    String finalName;
+    String finalName = "";
+    ArrayList<Character> coleccion = new ArrayList<Character>();
     JLabel vacio;
     Principal a;
     JLabel highScore;
     JLabel score;
+    File f = new File(System.getProperty("user.home")+"/arkanoid_records.txt");
+
     JLabel name;
     JLabel nameRegis;
     boolean winOver;
@@ -225,7 +234,49 @@ public class Save extends JPanel implements ActionListener {
                     Image tamaño13 = conversion13.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
                     ImageIcon imgPre13 = new ImageIcon(tamaño13);
                     auxVacio[cont].setIcon(imgPre13);
-                    
+                    if ((Integer.parseInt(e.getActionCommand())) + 65 >= 65
+                            && (Integer.parseInt(e.getActionCommand())) + 65 < 91) {
+
+                        Character a = (char) ((Integer.parseInt(e.getActionCommand())) + 65);
+                        coleccion.add(a);
+                    } else {
+                        // espacio
+                        if (Integer.parseInt(e.getActionCommand()) == 26) {
+                            Character a = (char) (32);
+                            coleccion.add(a);
+
+                        }
+                        // punto
+                        if (Integer.parseInt(e.getActionCommand()) == 27) {
+                            Character a = (char) (46);
+                            coleccion.add(a);
+
+                        }
+                        // Exclamacion
+                        if (Integer.parseInt(e.getActionCommand()) == 28) {
+                            Character a = (char) (33);
+                            coleccion.add(a);
+
+                        }
+                        // Interrogante
+                        if (Integer.parseInt(e.getActionCommand()) == 29) {
+                            Character a = (char) (63);
+                            coleccion.add(a);
+
+                        }
+                        // Corchete izquierda
+                        if (Integer.parseInt(e.getActionCommand()) == 30) {
+                            Character a = (char) (91);
+                            coleccion.add(a);
+
+                        }
+                        // Corchete derecha
+                        if (Integer.parseInt(e.getActionCommand()) == 31) {
+                            Character a = (char) (93);
+                            coleccion.add(a);
+
+                        }
+                    }
                 }
                 if (cont < 10) {
 
@@ -235,25 +286,51 @@ public class Save extends JPanel implements ActionListener {
             if (e.getSource() == del && cont > 0) {
                 cont--;
                 auxVacio[cont].setIcon(imgPre1);
+                coleccion.remove(coleccion.size() - 1);
             }
 
             if (e.getSource() == send) {
-            //     for (int i = 0; i < 10; i++) {
-                    
-            //         if((Integer.parseInt(auxVacio.))+81>=81 && (Integer.parseInt(e.getActionCommand()))+81<107){
-            //             System.err.println("LETRA");
-            //         }
-            //     }
-             
-            //     }
+                for (int i = 0; i < coleccion.size(); i++) {
+                    finalName += coleccion.get(i);
+                }
+                System.err.println(finalName);
+
+                try (PrintWriter f1 = new PrintWriter(new FileWriter(f.getPath(), true))) {
+                    f1.print(finalName+";"+Statics.puntuacion+"\n");
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null, "La base de datos no existe", "error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
+
+                if (winOver) {
+                    a.win.setVisible(true);
+                } else {
+                    a.gameOver.setVisible(true);
+                }
+                this.setVisible(false);
+                a.remove(a.save);
+                this.removeAll();
+                
+            }
+            // for (int i = 0; i < 10; i++) {
+
+            // if((Integer.parseInt(auxVacio.))+81>=81 &&
+            // (Integer.parseInt(e.getActionCommand()))+81<107){
+            // System.err.println("LETRA");
+            // }
+            // }
+
+            // }
             // }
             // if (e.getSource().getClass() == JButton.class) {
-            //     if (e.getSource() != back && e.getSource() != del && e.getSource() != send) {
-            //         if((Integer.parseInt(e.getActionCommand()))+81>=81 && (Integer.parseInt(e.getActionCommand()))+81<107){
-            //             System.err.println("LETRA");
-            //         }
-             
-            //     }
+            // if (e.getSource() != back && e.getSource() != del && e.getSource() != send) {
+            // if((Integer.parseInt(e.getActionCommand()))+81>=81 &&
+            // (Integer.parseInt(e.getActionCommand()))+81<107){
+            // System.err.println("LETRA");
+            // }
+
+            // }
             // }
 
         }
