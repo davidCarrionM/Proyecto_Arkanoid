@@ -2,8 +2,13 @@ package arkanoid;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class Principal extends JFrame implements ActionListener{
@@ -16,8 +21,11 @@ public class Principal extends JFrame implements ActionListener{
     public  Juego juego; 
     public  GameOver gameOver;
     public  Win win;
+    public Records records;
     public  Save save;
     static boolean eliminar = false;
+    File f = new File(System.getProperty("user.home")+"/arkanoid_records.txt");
+
 
     public Principal(){
         super("Arkanoid");
@@ -26,7 +34,7 @@ public class Principal extends JFrame implements ActionListener{
         tiempo.start();
         menu = new Menu(this);
         menu.setSize(1000,1000);
-        menu.setVisible(true);
+        menu.setVisible(false);
         add(menu);
         gameOver = new GameOver(this);
         gameOver.setSize(1000,1000);
@@ -40,6 +48,23 @@ public class Principal extends JFrame implements ActionListener{
         save.setSize(1000,1000);
         save.setVisible(false);
         add(save);
+        records = new Records(this);
+        records.setSize(1000, 1000);
+        records.setVisible(true);
+        add(records);
+
+        if(f.exists()){
+
+        }else{
+            try (PrintWriter f1 = new PrintWriter(new FileWriter(f.getPath(), true))) {
+                for (int i = 0; i < 5; i++) {
+                    f1.print("AAAAAAAAAA"+";"+"0"+"\n");
+                }
+            } catch (IOException e1) {
+                JOptionPane.showMessageDialog(null, "La base de datos no existe", "error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     @Override

@@ -77,6 +77,7 @@ public class Save extends JPanel implements ActionListener {
             auxVacio[i] = vacio;
             x1 += 55;
         }
+        
         ImageIcon imagen2 = new ImageIcon(Save.class.getResource("/arkanoid/img/name.png"));
         Image conversion2 = imagen2.getImage();
         Image tamaño2 = conversion2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
@@ -313,25 +314,6 @@ public class Save extends JPanel implements ActionListener {
                 this.removeAll();
                 
             }
-            // for (int i = 0; i < 10; i++) {
-
-            // if((Integer.parseInt(auxVacio.))+81>=81 &&
-            // (Integer.parseInt(e.getActionCommand()))+81<107){
-            // System.err.println("LETRA");
-            // }
-            // }
-
-            // }
-            // }
-            // if (e.getSource().getClass() == JButton.class) {
-            // if (e.getSource() != back && e.getSource() != del && e.getSource() != send) {
-            // if((Integer.parseInt(e.getActionCommand()))+81>=81 &&
-            // (Integer.parseInt(e.getActionCommand()))+81<107){
-            // System.err.println("LETRA");
-            // }
-
-            // }
-            // }
 
         }
 

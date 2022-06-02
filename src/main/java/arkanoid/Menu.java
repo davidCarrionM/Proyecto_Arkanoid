@@ -154,5 +154,9 @@ public class Menu extends JPanel implements ActionListener {
         if (e.getSource() == btnExit) {
             System.exit(0);
         }
+        if(e.getSource() == btnRead){
+            this.setVisible(false);
+            a.records.setVisible(true);
+        }
     }
 }

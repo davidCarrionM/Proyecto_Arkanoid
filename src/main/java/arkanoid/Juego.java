@@ -89,7 +89,7 @@ public class Juego extends JPanel implements ActionListener {
             barrera = new Barrera(this);
             barrera.setSize(50, 10);
             barrera.setLocation(x1, y1);
-            // this.add(barrera);
+            this.add(barrera);
             x1 += 60;
         }
         ImageIcon imagen = new ImageIcon(Juego.class.getResource("/arkanoid/img/num0.png"));
