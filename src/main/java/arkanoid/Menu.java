@@ -17,6 +17,7 @@ public class Menu extends JPanel implements ActionListener {
     JButton btnStart;
     JButton btnRead;
     Juego juego;
+    Records records;
     Principal a;
     JLabel taito;
     JLabel titulo;
@@ -155,8 +156,12 @@ public class Menu extends JPanel implements ActionListener {
             System.exit(0);
         }
         if(e.getSource() == btnRead){
+            records = new Records(a);
+            records.setSize(1000, 1000);
+            records.setVisible(true);
+            a.add(records);
+            records=null;
             this.setVisible(false);
-            a.records.setVisible(true);
         }
     }
 }

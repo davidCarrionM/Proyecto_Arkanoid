@@ -34,7 +34,7 @@ public class Principal extends JFrame implements ActionListener{
         tiempo.start();
         menu = new Menu(this);
         menu.setSize(1000,1000);
-        menu.setVisible(false);
+        menu.setVisible(true);
         add(menu);
         gameOver = new GameOver(this);
         gameOver.setSize(1000,1000);
@@ -48,10 +48,6 @@ public class Principal extends JFrame implements ActionListener{
         save.setSize(1000,1000);
         save.setVisible(false);
         add(save);
-        records = new Records(this);
-        records.setSize(1000, 1000);
-        records.setVisible(true);
-        add(records);
 
         if(f.exists()){
 

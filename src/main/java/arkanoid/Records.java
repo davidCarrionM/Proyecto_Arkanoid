@@ -51,29 +51,23 @@ public class Records extends JPanel implements ActionListener {
         top.setIcon(imgPre2);
         add(top);
 
-        ImageIcon imagen13 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/num0.png"));
-        Image conversion13 = imagen13.getImage();
-        Image tamaño13 = conversion13.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        ImageIcon imgPre13 = new ImageIcon(tamaño13);
+        // ImageIcon imagen13 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/num0.png"));
+        // Image conversion13 = imagen13.getImage();
+        // Image tamaño13 = conversion13.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        // ImageIcon imgPre13 = new ImageIcon(tamaño13);
         ImageIcon imagen14 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/letra.png"));
         Image conversion14 = imagen14.getImage();
         Image tamaño14 = conversion14.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon imgPre14 = new ImageIcon(tamaño14);
         
         ArrayList<ObjetoRecord> objetos = new ArrayList<ObjetoRecord>();
-        ArrayList<Integer> numeros = new ArrayList<Integer>();
-        ArrayList<String> cadenas = new ArrayList<String>();
         String cadena;
-        
         String[] split = new String[2];
         try (Scanner f1 = new Scanner(new File(f.getPath()))) {
             while (f1.hasNext()) {
                 ObjetoRecord ob = new ObjetoRecord();
                 cadena = f1.nextLine();
-                cadenas.add(cadena);
-                split = cadena.split(";");
-                numeros.add(Integer.parseInt(split[1]));                
-                
+                split = cadena.split(";");                
                 ob.nombre = split[0];
                 ob.puntuacion =  Integer.parseInt(split[1]);
                 objetos.add(ob);
@@ -81,11 +75,6 @@ public class Records extends JPanel implements ActionListener {
         } catch (IOException e) {
             System.err.println("Error de acceso al archivo: " + e.getMessage());
         }
-        String[] ffinal = new String[5];
-
-        int maximo = 0;
-        
-
         //BURBUJA
         for (int limit = objetos.size() - 1; limit > 0; limit--) {
             for (int firstIndex = 0; firstIndex < limit; firstIndex++) {
@@ -99,52 +88,16 @@ public class Records extends JPanel implements ActionListener {
             }
         }
 
-        System.err.println("Hola");
-
-        System.out.println(objetos.get(1).nombre+";"+objetos.get(1).puntuacion);
         for (int i = 0; i < objetos.size(); i++) {
             System.out.println(objetos.get(i).nombre+";"+objetos.get(i).puntuacion);
         }
 
 
-        // //BURBUJA
-        // for (int limit = numeros.size() - 1; limit > 0; limit--) {
-        //     for (int firstIndex = 0; firstIndex < limit; firstIndex++) {
-        //         int secondIndex = firstIndex + 1;
-        //         if (numeros.get(firstIndex) > numeros.get(secondIndex)) {
-        //             int first = numeros.get(firstIndex);
-        //             int second = numeros.get(secondIndex);
-        //             numeros.set(firstIndex, second);
-        //             numeros.set(secondIndex, first);
-        //         }
-        //     }
-        // }
-        
-
-
-        // for (int i = 0; i < numeros.size(); i++) {
-        //     System.out.println(numeros.get(i));
-        // }
-        // System.out.println("--------------------------------");
-
-        // for (int i = 0; i < 5; i++) {
-            
-        //     for (int j = 0; j < numeros.size(); j++) {
-        //         split = cadenas.get(j).split(";");
-        //         if( numeros.get(numeros.size()-j-1) == 400){
-        //             //Integer.parseInt(split[1])
-        //             ffinal[0]=cadenas.get(j);
-        //         } 
-        //     }
-        //     System.out.println(ffinal[i]);
-
-        // }
-
         int x = 100;
         int y = 450;
         int x2 = 230;
         int y2 = 450;
-        int x3 = 520;
+        int x3 = 530;
         int y3 = 450;
         for (int i = 0; i < 5; i++) {
             ImageIcon imagen1 = new ImageIcon(Records.class.getResource("/arkanoid/img/num" + (i + 1) + ".png"));
@@ -158,27 +111,40 @@ public class Records extends JPanel implements ActionListener {
             this.add(num);
             y += 95;
 
+            
             for (int j = 0; j < 6; j++) {
+                ImageIcon imagen11 = new ImageIcon(Records.class.getResource("/arkanoid/img/num" + (String.format("%06d", objetos.get(objetos.size()-i-1).puntuacion).charAt(j) + ".png")));
+                Image conversion11 = imagen11.getImage();
+                Image tamaño11 = conversion11.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+                ImageIcon imgPre11 = new ImageIcon(tamaño11);
                 numPuntuacion = new JLabel();
                 numPuntuacion.setSize(30, 30);
                 numPuntuacion.setLocation(x2, y2);
-                numPuntuacion.setIcon(imgPre13);
+                numPuntuacion.setIcon(imgPre11);
                 add(numPuntuacion);
                 x2 += 40;
             }
             y2 += 95;
             x2 = 230;
-
+            
             for (int j = 0; j < 10; j++) {
+                char auxLetra = (String.format("%-10s", objetos.get(objetos.size()-i-1).nombre).charAt(j));
+                if(auxLetra=='?'){
+                    auxLetra='1';
+                }
+                ImageIcon imagen11 = new ImageIcon(Records.class.getResource("/arkanoid/img/letras/letra" + (auxLetra) + ".png"));
+                Image conversion11 = imagen11.getImage();
+                Image tamaño11 = conversion11.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+                ImageIcon imgPre11 = new ImageIcon(tamaño11);
                 posLetra = new JLabel();
                 posLetra.setSize(30, 30);
                 posLetra.setLocation(x3, y3);
-                posLetra.setIcon(imgPre14);
+                posLetra.setIcon(imgPre11);
                 add(posLetra);
                 x3 += 33;
             }
             y3 += 95;
-            x3 = 520;
+            x3 = 530;
         }
 
         ImageIcon imagen = new ImageIcon(Menu.class.getResource("/arkanoid/img/subTituloR.png"));
@@ -232,6 +198,7 @@ public class Records extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == back) {
             this.setVisible(false);
+            this.removeAll();
             a.menu.setVisible(true);
         }
     }
