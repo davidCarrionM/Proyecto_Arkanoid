@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.io.IOException;
-import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,15 +49,6 @@ public class Records extends JPanel implements ActionListener {
         top.setLocation(90, 80);
         top.setIcon(imgPre2);
         add(top);
-
-        // ImageIcon imagen13 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/num0.png"));
-        // Image conversion13 = imagen13.getImage();
-        // Image tamaño13 = conversion13.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        // ImageIcon imgPre13 = new ImageIcon(tamaño13);
-        ImageIcon imagen14 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/letra.png"));
-        Image conversion14 = imagen14.getImage();
-        Image tamaño14 = conversion14.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        ImageIcon imgPre14 = new ImageIcon(tamaño14);
         
         ArrayList<ObjetoRecord> objetos = new ArrayList<ObjetoRecord>();
         String cadena;
@@ -88,10 +78,7 @@ public class Records extends JPanel implements ActionListener {
             }
         }
 
-        for (int i = 0; i < objetos.size(); i++) {
-            System.out.println(objetos.get(i).nombre+";"+objetos.get(i).puntuacion);
-        }
-
+        Statics.record = objetos.get(objetos.size()-1).puntuacion;
 
         int x = 100;
         int y = 450;

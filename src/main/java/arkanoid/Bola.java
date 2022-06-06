@@ -38,7 +38,7 @@ public class Bola extends JLabel implements ActionListener {
         Statics.puntuacion += 10;
         p.score();
         
-        if (p.ladrillos.size() == 86) {
+        if (p.ladrillos.size() == 0) {
             p.Ganar();
         }
     }

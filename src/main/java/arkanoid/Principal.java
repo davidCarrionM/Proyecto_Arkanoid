@@ -23,7 +23,8 @@ public class Principal extends JFrame implements ActionListener{
     public  Win win;
     public Records records;
     public  Save save;
-    static boolean eliminar = false;
+    boolean eliminar = false;
+    Statics clasesEstaticas = new Statics();
     File f = new File(System.getProperty("user.home")+"/arkanoid_records.txt");
 
 

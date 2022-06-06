@@ -29,6 +29,7 @@ public class Juego extends JPanel implements ActionListener {
     Principal a;
     public int powerCrecer = 0;
     public JLabel numPuntuacion;
+    public JLabel[] auxHighScore = new JLabel[6];
     public JLabel[] auxScore = new JLabel[6];
     ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
 
@@ -94,21 +95,33 @@ public class Juego extends JPanel implements ActionListener {
         }
         ImageIcon imagen = new ImageIcon(Juego.class.getResource("/arkanoid/img/num0.png"));
         Image conversion = imagen.getImage();
-        Image tamaño = conversion.getScaledInstance(16, 20, Image.SCALE_SMOOTH);
+        Image tamaño = conversion.getScaledInstance(15,15, Image.SCALE_SMOOTH);
         ImageIcon imgPre = new ImageIcon(tamaño);
 
         int x2 = 305;
         int y2 = 95;
         for (int i = 0; i < 6; i++) {
             numPuntuacion = new JLabel();
-            numPuntuacion.setSize(16, 20);
+            numPuntuacion.setSize(15,15);
             numPuntuacion.setLocation(x2, y2);
             auxScore[i] = numPuntuacion;
             numPuntuacion.setIcon(imgPre);
-            ;
-
             add(numPuntuacion);
             x2 += 20;
+        }
+        int x3 = 555;
+        int y3 = 95;
+        for (int j = 0; j < 6; j++) {
+            ImageIcon imagen11 = new ImageIcon(Records.class.getResource("/arkanoid/img/num" + (String.format("%06d", Statics.record).charAt(j) + ".png")));
+            Image conversion11 = imagen11.getImage();
+            Image tamaño11 = conversion11.getScaledInstance(15,15, Image.SCALE_SMOOTH);
+            ImageIcon imgPre11 = new ImageIcon(tamaño11);
+            highScore = new JLabel();
+            highScore.setSize(15,15);
+            highScore.setLocation(x3, y3);
+            highScore.setIcon(imgPre11);
+            add(highScore);
+            x3 += 20;
         }
 
         int x = 144;

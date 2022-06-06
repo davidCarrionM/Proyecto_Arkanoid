@@ -10,11 +10,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 
 public class Save extends JPanel implements ActionListener {
@@ -28,7 +30,7 @@ public class Save extends JPanel implements ActionListener {
     Principal a;
     JLabel highScore;
     JLabel score;
-    File f = new File(System.getProperty("user.home")+"/arkanoid_records.txt");
+    File f = new File(System.getProperty("user.home") + "/arkanoid_records.txt");
 
     JLabel name;
     JLabel nameRegis;
@@ -77,7 +79,7 @@ public class Save extends JPanel implements ActionListener {
             auxVacio[i] = vacio;
             x1 += 55;
         }
-        
+
         ImageIcon imagen2 = new ImageIcon(Save.class.getResource("/arkanoid/img/name.png"));
         Image conversion2 = imagen2.getImage();
         Image tamaño2 = conversion2.getScaledInstance(200, 50, Image.SCALE_SMOOTH);
@@ -176,23 +178,35 @@ public class Save extends JPanel implements ActionListener {
 
         ImageIcon imagen13 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/num0.png"));
         Image conversion13 = imagen13.getImage();
-        Image tamaño13 = conversion13.getScaledInstance(16, 20, Image.SCALE_SMOOTH);
+        Image tamaño13 = conversion13.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         ImageIcon imgPre13 = new ImageIcon(tamaño13);
 
         int x2 = 305;
         int y2 = 95;
 
-        // + (String.format("%06d", Statics.puntuacion).charAt(i) +
         for (int i = 0; i < 6; i++) {
-
             numPuntuacion = new JLabel();
-            numPuntuacion.setSize(16, 20);
+            numPuntuacion.setSize(15, 15);
             numPuntuacion.setLocation(x2, y2);
             auxScore[i] = numPuntuacion;
             numPuntuacion.setIcon(imgPre13);
             add(numPuntuacion);
             x2 += 20;
-
+        }
+        int x3 = 555;
+        int y3 = 95;
+        for (int j = 0; j < 6; j++) {
+            ImageIcon imagen11 = new ImageIcon(Records.class
+                    .getResource("/arkanoid/img/num" + (String.format("%06d", Statics.record).charAt(j) + ".png")));
+            Image conversion11 = imagen11.getImage();
+            Image tamaño11 = conversion11.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+            ImageIcon imgPre11 = new ImageIcon(tamaño11);
+            highScore = new JLabel();
+            highScore.setSize(15, 15);
+            highScore.setLocation(x3, y3);
+            highScore.setIcon(imgPre11);
+            add(highScore);
+            x3 += 20;
         }
     }
 
@@ -297,22 +311,52 @@ public class Save extends JPanel implements ActionListener {
                 System.err.println(finalName);
 
                 try (PrintWriter f1 = new PrintWriter(new FileWriter(f.getPath(), true))) {
-                    f1.print(finalName+";"+Statics.puntuacion+"\n");
+                    f1.print(finalName + ";" + Statics.puntuacion + "\n");
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(null, "La base de datos no existe", "error",
                             JOptionPane.ERROR_MESSAGE);
                 }
-
+                ArrayList<ObjetoRecord> objetos = new ArrayList<ObjetoRecord>();
+                String cadena;
+                String[] split = new String[2];
+                try (Scanner f1 = new Scanner(new File(f.getPath()))) {
+                    while (f1.hasNext()) {
+                        ObjetoRecord ob = new ObjetoRecord();
+                        cadena = f1.nextLine();
+                        split = cadena.split(";");                
+                        ob.nombre = split[0];
+                        ob.puntuacion =  Integer.parseInt(split[1]);
+                        objetos.add(ob);
+                    }
+                } catch (IOException e1) {
+                    System.err.println("Error de acceso al archivo: " + e1.getMessage());
+                }
+                //BURBUJA
+                for (int limit = objetos.size() - 1; limit > 0; limit--) {
+                    for (int firstIndex = 0; firstIndex < limit; firstIndex++) {
+                        int secondIndex = firstIndex + 1;
+                        if (objetos.get(firstIndex).puntuacion > objetos.get(secondIndex).puntuacion) {
+                            ObjetoRecord first = objetos.get(firstIndex);
+                            ObjetoRecord second = objetos.get(secondIndex);
+                            objetos.set(firstIndex, second);
+                            objetos.set(secondIndex, first);
+                        }
+                    }
+                }
+        
+                Statics.record = objetos.get(objetos.size()-1).puntuacion;
 
                 if (winOver) {
                     a.win.setVisible(true);
+                    a.win.score();
                 } else {
                     a.gameOver.setVisible(true);
+                    a.gameOver.score();
                 }
                 this.setVisible(false);
                 a.remove(a.save);
                 this.removeAll();
-                
+
             }
 
         }

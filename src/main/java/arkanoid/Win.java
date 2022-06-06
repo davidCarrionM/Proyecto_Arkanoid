@@ -23,8 +23,9 @@ public class Win extends JPanel implements ActionListener {
     JLabel lblWin;
     Principal a;
 
-      JLabel numPuntuacion;
-      JLabel[] auxScore = new JLabel[6];
+    JLabel numPuntuacion;
+    JLabel[] auxScore = new JLabel[6];
+    public JLabel[] auxHighScore = new JLabel[6];
 
     ImageIcon imagen2 = new ImageIcon(Menu.class.getResource("/arkanoid/img/play.png"));
     Image conversion2 = imagen2.getImage();
@@ -73,13 +74,21 @@ public class Win extends JPanel implements ActionListener {
 
     public void score() {
         for (int i = 0; i < 6; i++) {
-            ImageIcon imagen1 = new ImageIcon(Bola.class.getResource("/arkanoid/img/num" + (String.format("%06d", Statics.puntuacion).charAt(i) + ".png")));
+            ImageIcon imagen1 = new ImageIcon(Bola.class
+                    .getResource("/arkanoid/img/num" + (String.format("%06d", Statics.puntuacion).charAt(i) + ".png")));
             Image conversion1 = imagen1.getImage();
             Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxScore[i].setIcon(imgPre1);
             System.err.println(Statics.time);
-
+        }
+        for (int i = 0; i < 6; i++) {
+            ImageIcon imagen1 = new ImageIcon(Bola.class
+                    .getResource("/arkanoid/img/num" + (String.format("%06d", Statics.record).charAt(i) + ".png")));
+            Image conversion1 = imagen1.getImage();
+            Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+            ImageIcon imgPre1 = new ImageIcon(tamaño1);
+            auxHighScore[i].setIcon(imgPre1);
         }
     }
 
@@ -147,7 +156,7 @@ public class Win extends JPanel implements ActionListener {
         add(score);
         btnSave = new JButton("SAVE");
         btnSave.setSize(160, 40);
-        btnSave.setLocation(40 , 50);
+        btnSave.setLocation(40, 50);
         btnSave.addActionListener(this);
         btnSave.setFocusPainted(false);
         btnSave.setBorderPainted(false);
@@ -157,22 +166,34 @@ public class Win extends JPanel implements ActionListener {
         add(btnSave);
         ImageIcon imagen13 = new ImageIcon(GameOver.class.getResource("/arkanoid/img/num0.png"));
         Image conversion13 = imagen13.getImage();
-        Image tamaño13 = conversion13.getScaledInstance(16, 20, Image.SCALE_SMOOTH);
+        Image tamaño13 = conversion13.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         ImageIcon imgPre13 = new ImageIcon(tamaño13);
-       
-       int x2 = 305;
-       int y2 = 95;
-       
+
+        int x2 = 305;
+        int y2 = 95;
+
         for (int i = 0; i < 6; i++) {
 
             numPuntuacion = new JLabel();
-            numPuntuacion.setSize(16, 20);
+            numPuntuacion.setSize(15, 15);
             numPuntuacion.setLocation(x2, y2);
             auxScore[i] = numPuntuacion;
             numPuntuacion.setIcon(imgPre13);
             add(numPuntuacion);
             x2 += 20;
-     
+
+        }
+        int x3 = 555;
+        int y3 = 95;
+
+        for (int i = 0; i < 6; i++) {
+            highScore = new JLabel();
+            highScore.setSize(15, 15);
+            highScore.setLocation(x3, y3);
+            auxHighScore[i] = highScore;
+            highScore.setIcon(imgPre13);
+            add(highScore);
+            x3 += 20;
         }
     }
 
@@ -189,7 +210,7 @@ public class Win extends JPanel implements ActionListener {
             if (e.getSource() == btnMenu) {
                 btnMenu.setIcon(imgPre7);
             }
-            if(e.getSource()== btnSave){
+            if (e.getSource() == btnSave) {
                 btnSave.setIcon(imgPre10);
             }
         }
@@ -205,7 +226,7 @@ public class Win extends JPanel implements ActionListener {
             if (e.getSource() == btnMenu) {
                 btnMenu.setIcon(imgPre6);
             }
-            if(e.getSource()== btnSave){
+            if (e.getSource() == btnSave) {
                 btnSave.setIcon(imgPre9);
             }
         }
@@ -220,7 +241,7 @@ public class Win extends JPanel implements ActionListener {
             a.add(juego);
             Statics.puntuacion = 0;
             Statics.time = 0;
-            juego=null;
+            juego = null;
 
             this.setVisible(false);
         }
@@ -231,7 +252,7 @@ public class Win extends JPanel implements ActionListener {
         if (e.getSource() == btnExit) {
             System.exit(0);
         }
-        if(e.getSource() == btnSave){
+        if (e.getSource() == btnSave) {
             save = new Save(a);
             save.setSize(1000, 1000);
             save.setVisible(true);

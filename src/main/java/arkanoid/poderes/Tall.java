@@ -10,7 +10,6 @@ import javax.swing.Timer;
 
 import arkanoid.Bola;
 import arkanoid.Juego;
-import arkanoid.Juego.*;
 
 public class Tall extends JLabel implements ActionListener {
     Juego p;
