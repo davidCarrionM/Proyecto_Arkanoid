@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -38,6 +43,18 @@ public class Records extends JPanel implements ActionListener {
     Image tamaño5 = conversion5.getScaledInstance(200, 40, Image.SCALE_SMOOTH);
     ImageIcon imgPre5 = new ImageIcon(tamaño5);
     File f = new File(System.getProperty("user.home") + "/arkanoid_records.txt");
+
+    public void ReproducirSonido(String nombreSonido) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem
+                    .getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
+        }
+    }
 
     public Records(Principal a) {
         this.setBackground(Color.BLACK);
@@ -167,6 +184,8 @@ public class Records extends JPanel implements ActionListener {
         back.addMouseListener(new MouseEvent());
         back.addActionListener(this);
         this.add(back);
+        ReproducirSonido("src/main/java/arkanoid/sonidos/record.wav");
+
     }
 
     public class MouseEvent extends MouseAdapter {
@@ -175,6 +194,7 @@ public class Records extends JPanel implements ActionListener {
         public void mouseEntered(java.awt.event.MouseEvent e) {
             if (e.getSource() == back) {
                 back.setIcon(imgPre5);
+                ReproducirSonido("src/main/java/arkanoid/sonidos/entra.wav");
             }
         }
 
@@ -192,6 +212,7 @@ public class Records extends JPanel implements ActionListener {
             this.setVisible(false);
             this.removeAll();
             a.menu.setVisible(true);
+            a.menu.musica();
         }
     }
 

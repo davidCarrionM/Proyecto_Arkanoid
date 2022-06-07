@@ -4,7 +4,14 @@ import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
@@ -12,13 +19,28 @@ import javax.swing.Timer;
 import arkanoid.acciones.Juego;
 import arkanoid.objetos.Ladrillo;
 
+/**
+ * SuperPoder que explota un porcentaje de ladrillos aleatorios
+ */
 public class Explote extends JLabel implements ActionListener {
     Juego p;
     public Timer timer;
     public boolean move = false;
     boolean empezar = false;
     int cont = 0;
-    
+
+    public void ReproducirSonido(String nombreSonido) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem
+                    .getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
+        }
+    }
+
     public Explote(Juego p) {
         ImageIcon imagen = new ImageIcon(Tall.class.getResource("/arkanoid/img/power1.png"));
         Image conversion = imagen.getImage();
@@ -33,30 +55,32 @@ public class Explote extends JLabel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == timer && move){
-            this.setLocation(this.getX(), this.getY()+10);
+        if (e.getSource() == timer && move) {
+            this.setLocation(this.getX(), this.getY() + 10);
 
-
-            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()  && this.getX() <= (p.barra.getX() + 130+p.powerCrecer)) {
+            if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX()
+                    && this.getX() <= (p.barra.getX() + 130 + p.powerCrecer)) {
+                ReproducirSonido("src/main/java/arkanoid/sonidos/power.wav");
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;
+
                 for (Component componente : p.getComponents()) {
-                    if(componente.getClass() == Ladrillo.class){
-                        int random = (int)(Math.random()*10);
-                        if(random == 1||random == 2){
+                    if (componente.getClass() == Ladrillo.class) {
+                        int random = (int) (Math.random() * 10);
+                        if (random == 1 || random == 2) {
                             p.bola.eliminar(componente);
                         }
                     }
                 }
             }
-            
-            if(this.getY() >= 950){
+
+            if (this.getY() >= 950) {
                 p.remove(this);
                 this.setVisible(false);
                 this.move = false;
             }
-        }      
+        }
     }
 
 }

@@ -13,8 +13,10 @@ import arkanoid.acciones.Records;
 import arkanoid.acciones.Save;
 import arkanoid.acciones.Win;
 
+/**
+ * Frame Principal donde se inicializan las clases
+ */
 public class Principal extends JFrame implements ActionListener{
-    
     Timer tiempo;
     int contTiempo = 0;
     String titulo = "Arkanoid";
@@ -29,7 +31,9 @@ public class Principal extends JFrame implements ActionListener{
     Statics clasesEstaticas = new Statics();
     File f = new File(System.getProperty("user.home")+"/arkanoid_records.txt");
 
-
+/**
+ * Constructor de la clase Principal
+ */
     public Principal(){
         super("Arkanoid");
 
@@ -55,6 +59,9 @@ public class Principal extends JFrame implements ActionListener{
         
     }
 
+    /**
+     * gestion del timer y eliminar la clase juego
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == tiempo) {

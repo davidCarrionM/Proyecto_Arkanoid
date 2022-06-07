@@ -10,6 +10,9 @@ import javax.swing.Timer;
 
 import arkanoid.acciones.Juego;
 
+/**
+ * Barra donde va a rebotar la bola 
+ */
 public class Barra extends JLabel implements ActionListener{
      ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/barra.png"));
      Image conversion = imagen.getImage();

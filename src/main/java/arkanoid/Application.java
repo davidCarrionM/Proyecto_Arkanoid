@@ -3,6 +3,9 @@ package arkanoid;
 
 import javax.swing.JFrame;
 
+/**
+ * Main
+ */
 public class Application {
   public static void main(String[] args) {
     Principal frame = new Principal();

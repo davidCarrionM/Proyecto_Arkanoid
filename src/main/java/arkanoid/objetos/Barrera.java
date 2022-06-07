@@ -8,6 +8,9 @@ import javax.swing.Timer;
 
 import arkanoid.acciones.Juego;
 
+/**
+ * Protecion para que no se caiga la bola que se destruye cuando se choca la bola
+ */
 public class Barrera extends JLabel{
     
     private ImageIcon imagen = new ImageIcon(Barrera.class.getResource("/arkanoid/img/barra.png"));

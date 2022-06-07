@@ -11,6 +11,9 @@ import arkanoid.acciones.Juego;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/**
+ * Ladrillo donde tiene que chocar la bola y de lcual saldran los poderes
+ */
 public class Ladrillo extends JLabel implements ActionListener {
     boolean animacion = false;
     Timer timerAnimacion;

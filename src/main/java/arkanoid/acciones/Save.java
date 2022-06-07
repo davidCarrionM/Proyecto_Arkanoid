@@ -12,11 +12,15 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import javax.swing.JPanel;
 
 import arkanoid.Principal;
@@ -65,6 +69,17 @@ public class Save extends JPanel implements ActionListener {
             Image tamaño1 = conversion1.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxScore[i].setIcon(imgPre1);
+        }
+    }
+    public void ReproducirSonido(String nombreSonido) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem
+                    .getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
         }
     }
 
@@ -221,6 +236,7 @@ public class Save extends JPanel implements ActionListener {
         public void mouseEntered(java.awt.event.MouseEvent e) {
             if (e.getSource() == back) {
                 back.setIcon(imgPre5);
+                ReproducirSonido("src/main/java/arkanoid/sonidos/entra.wav");
             }
         }
 
@@ -247,6 +263,7 @@ public class Save extends JPanel implements ActionListener {
 
         if (e.getSource().getClass() == JButton.class) {
             if (e.getSource() != back && e.getSource() != del && e.getSource() != send) {
+                ReproducirSonido("src/main/java/arkanoid/sonidos/click.wav");
                 if (cont < 10 && cont >= 0) {
                     ImageIcon imagen13 = new ImageIcon(
                             GameOver.class.getResource("/arkanoid/img/letra" + e.getActionCommand() + ".png"));
@@ -304,12 +321,16 @@ public class Save extends JPanel implements ActionListener {
                 }
             }
             if (e.getSource() == del && cont > 0) {
+                ReproducirSonido("src/main/java/arkanoid/sonidos/click.wav");
                 cont--;
                 auxVacio[cont].setIcon(imgPre1);
                 coleccion.remove(coleccion.size() - 1);
+
             }
 
             if (e.getSource() == send) {
+                ReproducirSonido("src/main/java/arkanoid/sonidos/click.wav");
+
                 for (int i = 0; i < coleccion.size(); i++) {
                     finalName += coleccion.get(i);
                 }

@@ -5,7 +5,14 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,6 +23,9 @@ import arkanoid.Principal;
 import arkanoid.Statics;
 import arkanoid.objetos.Bola;
 
+/**
+ * Panel que aparece cuando pierde el jugador
+ */
 public class GameOver extends JPanel implements ActionListener {
     JButton btnExit;
     JButton btnMenu;
@@ -77,6 +87,18 @@ public class GameOver extends JPanel implements ActionListener {
     Image tamaño10 = conversion10.getScaledInstance(160, 40, Image.SCALE_SMOOTH);
     ImageIcon imgPre10 = new ImageIcon(tamaño10);
 
+    public void ReproducirSonido(String nombreSonido) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem
+                    .getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
+        }
+    }
+
     public void score() {
         for (int i = 0; i < 6; i++) {
             ImageIcon imagen1 = new ImageIcon(Bola.class
@@ -94,7 +116,9 @@ public class GameOver extends JPanel implements ActionListener {
             ImageIcon imgPre1 = new ImageIcon(tamaño1);
             auxHighScore[i].setIcon(imgPre1);
         }
-
+    }
+    public void musica(){
+        ReproducirSonido("src/main/java/arkanoid/sonidos/gameOver.wav");
     }
 
     public GameOver(Principal a) {
@@ -201,7 +225,6 @@ public class GameOver extends JPanel implements ActionListener {
             add(highScore);
             x3 += 20;
         }
-
     }
 
     public class MouseEvent extends MouseAdapter {
@@ -220,6 +243,7 @@ public class GameOver extends JPanel implements ActionListener {
             if (e.getSource() == btnSave) {
                 btnSave.setIcon(imgPre10);
             }
+            ReproducirSonido("src/main/java/arkanoid/sonidos/entra.wav");
         }
 
         @Override
@@ -253,6 +277,7 @@ public class GameOver extends JPanel implements ActionListener {
         }
         if (e.getSource() == btnMenu) {
             a.menu.setVisible(true);
+            a.menu.musica();
             this.setVisible(false);
         }
         if (e.getSource() == btnExit) {

@@ -1,17 +1,27 @@
 package arkanoid.objetos;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
-import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import arkanoid.Statics;
 import arkanoid.acciones.Juego;
 
+/**
+ * Bola del juego donde se van a gestionar todas las colisiones
+ */
 public class Bola extends JLabel implements ActionListener {
     Timer timerBola;
     public boolean flagEmpezar = false;
@@ -26,6 +36,18 @@ public class Bola extends JLabel implements ActionListener {
     Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
     ImageIcon imgPre = new ImageIcon(tamaño);
 
+    public void ReproducirSonido(String nombreSonido) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem
+                    .getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
+        }
+    }
+
     // Principal a;
     public Bola(Juego p) {
         timerBola = new Timer(15, this);
@@ -37,10 +59,11 @@ public class Bola extends JLabel implements ActionListener {
 
     public void eliminar(Component objeto) {
         p.ladrillos.remove(objeto);
+        ReproducirSonido("src/main/java/arkanoid/sonidos/romper.wav");
         ((Ladrillo) objeto).animacion = true;
         Statics.puntuacion += 10;
         p.score();
-        
+
         if (p.ladrillos.size() == 0) {
             p.Ganar();
         }
@@ -96,7 +119,8 @@ public class Bola extends JLabel implements ActionListener {
             for (Component component : p.getComponents()) {
                 if (component.getClass() == Barrera.class) {
                     if (this.getY() >= component.getY() && this.getX() >= component.getX()
-                            && this.getX() <= (component.getX() + 50)) {
+                            && this.getX() <= (component.getX() + 50) && this.getY() <= component.getY()+10) {
+                        ReproducirSonido("src/main/java/arkanoid/sonidos/barrera.wav");
                         component.setVisible(false);
                         p.remove(component);
                         this.setLocation(p.barra.getX() + (p.barra.getWidth() / 2), p.barra.getY() - 20);
@@ -116,29 +140,36 @@ public class Bola extends JLabel implements ActionListener {
                     && this.getX() <= (p.barra.getX() + 120 + p.powerCrecer)) {
                 velocidady = -vel;
                 velocidadx = +2;
+                ReproducirSonido("src/main/java/arkanoid/sonidos/rebote.wav");
             }
             // barra izquierda
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() - 10
                     && this.getX() <= (p.barra.getX() + 20 + p.powerCrecer)) {
                 velocidady = -vel;
                 velocidadx = -2;
+                ReproducirSonido("src/main/java/arkanoid/sonidos/rebote.wav");
             }
             // barra centro
             if (this.getY() >= 880 && this.getY() <= 900 && this.getX() >= p.barra.getX() + 21
                     && this.getX() <= (p.barra.getX() + 109 + p.powerCrecer)) {
                 velocidady = -vel;
+                ReproducirSonido("src/main/java/arkanoid/sonidos/rebote.wav");
+
             }
             // techo
             if (this.getY() <= 180) {
                 velocidady = +vel;
+                ReproducirSonido("src/main/java/arkanoid/sonidos/rebote.wav");
             }
             // izquierda
             if (this.getX() <= 150) {
                 velocidadx = +2;
+                ReproducirSonido("src/main/java/arkanoid/sonidos/rebote.wav");
             }
             // derecha
             if (this.getX() >= 830) {
                 velocidadx = -2;
+                ReproducirSonido("src/main/java/arkanoid/sonidos/rebote.wav");
             }
 
         }

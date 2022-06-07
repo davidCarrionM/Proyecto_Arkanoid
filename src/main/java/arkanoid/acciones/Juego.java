@@ -6,8 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,10 +28,15 @@ import arkanoid.objetos.Barrera;
 import arkanoid.objetos.Bola;
 import arkanoid.objetos.Ladrillo;
 
+/**
+ * Panel del juego principal donde se crean los ladrillos, la bola, las
+ * barreras, la barra y la clase que gestiona los poderes
+ */
 public class Juego extends JPanel implements ActionListener {
     JLabel lblFondo;
     JLabel score;
     JLabel highScore;
+    Clip clip;
     public Barra barra;
     Barrera barrera;
     Timer tiempo;
@@ -40,15 +52,29 @@ public class Juego extends JPanel implements ActionListener {
     public JLabel[] auxScore = new JLabel[6];
     public ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
 
+    public void ReproducirSonido(String nombreSonido) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem
+                    .getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            System.out.println("Error al reproducir el sonido.");
+        }
+    }
+
     public void Ganar() {
         System.out.println("GANASTE");
         bola.flagEmpezar = false;
         a.win.setVisible(true);
         a.win.score();
+        a.win.musica();
         this.tiempo.stop();
-
         this.setVisible(false);
         this.removeAll();
+        clip.stop();
     }
 
     public void score() {
@@ -66,10 +92,11 @@ public class Juego extends JPanel implements ActionListener {
         bola.flagEmpezar = false;
         a.gameOver.setVisible(true);
         a.gameOver.score();
+        a.gameOver.musica();
         this.setVisible(false);
         this.tiempo.stop();
         this.removeAll();
-
+        clip.stop();
     }
 
     public Juego(Principal a) {
@@ -102,14 +129,14 @@ public class Juego extends JPanel implements ActionListener {
         }
         ImageIcon imagen = new ImageIcon(Juego.class.getResource("/arkanoid/img/num0.png"));
         Image conversion = imagen.getImage();
-        Image tamaño = conversion.getScaledInstance(15,15, Image.SCALE_SMOOTH);
+        Image tamaño = conversion.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         ImageIcon imgPre = new ImageIcon(tamaño);
 
         int x2 = 305;
         int y2 = 95;
         for (int i = 0; i < 6; i++) {
             numPuntuacion = new JLabel();
-            numPuntuacion.setSize(15,15);
+            numPuntuacion.setSize(15, 15);
             numPuntuacion.setLocation(x2, y2);
             auxScore[i] = numPuntuacion;
             numPuntuacion.setIcon(imgPre);
@@ -119,12 +146,13 @@ public class Juego extends JPanel implements ActionListener {
         int x3 = 555;
         int y3 = 95;
         for (int j = 0; j < 6; j++) {
-            ImageIcon imagen11 = new ImageIcon(Records.class.getResource("/arkanoid/img/num" + (String.format("%06d", Statics.record).charAt(j) + ".png")));
+            ImageIcon imagen11 = new ImageIcon(Records.class
+                    .getResource("/arkanoid/img/num" + (String.format("%06d", Statics.record).charAt(j) + ".png")));
             Image conversion11 = imagen11.getImage();
-            Image tamaño11 = conversion11.getScaledInstance(15,15, Image.SCALE_SMOOTH);
+            Image tamaño11 = conversion11.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
             ImageIcon imgPre11 = new ImageIcon(tamaño11);
             highScore = new JLabel();
-            highScore.setSize(15,15);
+            highScore.setSize(15, 15);
             highScore.setLocation(x3, y3);
             highScore.setIcon(imgPre11);
             add(highScore);
@@ -193,7 +221,7 @@ public class Juego extends JPanel implements ActionListener {
 
         tiempo = new Timer(1000, this);
         tiempo.start();
-
+        ReproducirSonido("src/main/java/arkanoid/sonidos/juego.wav");
     }
 
     public class movimientoKey extends KeyAdapter {
@@ -250,8 +278,8 @@ public class Juego extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == tiempo) {
-            Statics.time +=1;
-            System.err.println("tiempo Juego"+Statics.time);
+            Statics.time += 1;
+            System.err.println("tiempo Juego" + Statics.time);
         }
     }
 }

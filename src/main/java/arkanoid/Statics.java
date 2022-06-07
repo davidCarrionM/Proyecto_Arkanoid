@@ -11,12 +11,18 @@ import javax.swing.JOptionPane;
 
 import arkanoid.acciones.ObjetoRecord;
 
+/**
+ * Clase de funciones estaticas, la puntuacion, el record y el tiempo
+ */
 public class Statics {
     public static int puntuacion;
     public static int record;
     public static int time;
     File f = new File(System.getProperty("user.home") + "/arkanoid_records.txt");
 
+    /**
+     * Constructor de clases estaticas
+     */
     Statics() {
         if (f.exists()) {
 
