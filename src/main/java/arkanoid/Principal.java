@@ -3,12 +3,8 @@ package arkanoid;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class Principal extends JFrame implements ActionListener{
@@ -50,18 +46,7 @@ public class Principal extends JFrame implements ActionListener{
         save.setVisible(false);
         add(save);
 
-        if(f.exists()){
-
-        }else{
-            try (PrintWriter f1 = new PrintWriter(new FileWriter(f.getPath(), true))) {
-                for (int i = 0; i < 5; i++) {
-                    f1.print("AAAAAAAAAA"+";"+"0"+"\n");
-                }
-            } catch (IOException e1) {
-                JOptionPane.showMessageDialog(null, "La base de datos no existe", "error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        
     }
 
     @Override
