@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.acciones;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -14,6 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import arkanoid.Principal;
+import arkanoid.Statics;
+import arkanoid.objetos.Barra;
+import arkanoid.objetos.Barrera;
+import arkanoid.objetos.Bola;
+import arkanoid.objetos.Ladrillo;
+
 public class Juego extends JPanel implements ActionListener {
     JLabel lblFondo;
     JLabel score;
@@ -22,16 +29,16 @@ public class Juego extends JPanel implements ActionListener {
     Barrera barrera;
     Timer tiempo;
     Ladrillo ladrillo;
-    PowerUp powerUp;
+    public PowerUp powerUp;
     public Bola bola;
     int puntuacion;
-    Icon[] auxExplosion = new Icon[8];
+    public Icon[] auxExplosion = new Icon[8];
     Principal a;
     public int powerCrecer = 0;
     public JLabel numPuntuacion;
     public JLabel[] auxHighScore = new JLabel[6];
     public JLabel[] auxScore = new JLabel[6];
-    ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
+    public ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
 
     public void Ganar() {
         System.out.println("GANASTE");
@@ -65,7 +72,7 @@ public class Juego extends JPanel implements ActionListener {
 
     }
 
-    Juego(Principal a) {
+    public Juego(Principal a) {
         Statics.time = 0;
 
         setLayout(null);

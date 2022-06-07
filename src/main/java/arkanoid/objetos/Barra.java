@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.objetos;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+import arkanoid.acciones.Juego;
+
 public class Barra extends JLabel implements ActionListener{
      ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/barra.png"));
      Image conversion = imagen.getImage();
@@ -16,11 +18,11 @@ public class Barra extends JLabel implements ActionListener{
     Juego p;
     Timer timerBarraDerecha;
     Timer timerBarraIzquierda;
-    boolean flagBarraDerecha = false;
-    boolean flagBarraIzquierda = false;
+    public boolean flagBarraDerecha = false;
+    public boolean flagBarraIzquierda = false;
     public int movimiento = 10;
 
-    Barra(Juego p){
+    public Barra(Juego p){
         this.setIcon(imgPre);
         this.p=p;
         timerBarraDerecha = new Timer(17, this);

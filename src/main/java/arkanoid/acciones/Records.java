@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.acciones;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -14,6 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import arkanoid.Menu;
+import arkanoid.Principal;
+import arkanoid.Statics;
+import arkanoid.objetos.Ladrillo;
 
 public class Records extends JPanel implements ActionListener {
     Principal a;
@@ -34,7 +39,7 @@ public class Records extends JPanel implements ActionListener {
     ImageIcon imgPre5 = new ImageIcon(tamaño5);
     File f = new File(System.getProperty("user.home") + "/arkanoid_records.txt");
 
-    Records(Principal a) {
+    public Records(Principal a) {
         this.setBackground(Color.BLACK);
         this.setLayout(null);
         this.a = a;

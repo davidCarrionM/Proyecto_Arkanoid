@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import arkanoid.Barrera;
-import arkanoid.Juego;
+import arkanoid.acciones.Juego;
+import arkanoid.objetos.Barrera;
 
 public class Bad extends JLabel implements ActionListener {
     Juego p;

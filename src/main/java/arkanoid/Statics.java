@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import arkanoid.acciones.ObjetoRecord;
+
 public class Statics {
     public static int puntuacion;
     public static int record;

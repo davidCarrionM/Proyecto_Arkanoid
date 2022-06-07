@@ -1,10 +1,12 @@
-package arkanoid;
+package arkanoid.objetos;
 
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import arkanoid.acciones.Juego;
 
 public class Barrera extends JLabel{
     
@@ -17,7 +19,7 @@ public class Barrera extends JLabel{
     boolean animacion;
     int contaux = 0;
     
-    Barrera(Juego p ){
+    public Barrera(Juego p ){
         this.p=p;
         this.setIcon(imgPre);
 

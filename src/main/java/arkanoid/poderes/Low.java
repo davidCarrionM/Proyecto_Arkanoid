@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import arkanoid.Juego;
+import arkanoid.acciones.Juego;
 
 public class Low extends JLabel implements ActionListener {
     Juego p;

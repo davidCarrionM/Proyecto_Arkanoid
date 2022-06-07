@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import arkanoid.Ladrillo;
-import arkanoid.Juego;
+import arkanoid.acciones.Juego;
+import arkanoid.objetos.Ladrillo;
 
 public class Explote extends JLabel implements ActionListener {
     Juego p;

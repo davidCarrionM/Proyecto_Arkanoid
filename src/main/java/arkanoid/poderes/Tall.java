@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import arkanoid.Bola;
-import arkanoid.Juego;
+import arkanoid.acciones.Juego;
+import arkanoid.objetos.Bola;
 
 public class Tall extends JLabel implements ActionListener {
     Juego p;

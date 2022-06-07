@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import arkanoid.acciones.Juego;
+import arkanoid.acciones.Records;
+
 public class Menu extends JPanel implements ActionListener {
     JButton btnExit;
     JButton btnMenu;

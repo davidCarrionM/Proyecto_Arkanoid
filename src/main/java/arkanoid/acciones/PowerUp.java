@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.acciones;
 
 import javax.swing.JLabel;
 
@@ -6,8 +6,8 @@ import arkanoid.poderes.*;
 
 public class PowerUp extends JLabel {
     Juego p;
-    int XLadrillo;
-    int YLadrillo;
+    public int XLadrillo;
+    public int YLadrillo;
     public Tall tall;
     public Low low;
     public Explote explote;

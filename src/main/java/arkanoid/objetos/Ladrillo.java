@@ -1,10 +1,13 @@
-package arkanoid;
+package arkanoid.objetos;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
+
+import arkanoid.acciones.Juego;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -14,7 +17,7 @@ public class Ladrillo extends JLabel implements ActionListener {
     int contaux = 0;
     Juego p;
 
-    Ladrillo(Juego p, int index) {
+    public Ladrillo(Juego p, int index) {
         ImageIcon imagen = new ImageIcon(Ladrillo.class.getResource("/arkanoid/img/bloque" + index + ".png"));
         Image conversion = imagen.getImage();
         Image tamaño = conversion.getScaledInstance(63, 25, Image.SCALE_SMOOTH);

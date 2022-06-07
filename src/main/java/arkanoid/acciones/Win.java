@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.acciones;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -10,6 +10,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import arkanoid.Menu;
+import arkanoid.Principal;
+import arkanoid.Statics;
+import arkanoid.objetos.Bola;
 
 public class Win extends JPanel implements ActionListener {
     JButton btnExit;
@@ -92,7 +97,7 @@ public class Win extends JPanel implements ActionListener {
         }
     }
 
-    Win(Principal a) {
+    public Win(Principal a) {
         setLayout(null);
         this.setBackground(Color.YELLOW);
         this.a = a;

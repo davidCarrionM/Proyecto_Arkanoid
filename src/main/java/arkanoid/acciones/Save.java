@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.acciones;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -18,6 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import javax.swing.JPanel;
+
+import arkanoid.Principal;
+import arkanoid.Statics;
+import arkanoid.objetos.Bola;
+import arkanoid.objetos.Ladrillo;
 
 public class Save extends JPanel implements ActionListener {
     JButton letra;

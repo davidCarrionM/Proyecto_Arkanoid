@@ -1,4 +1,4 @@
-package arkanoid;
+package arkanoid.objetos;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -9,14 +9,17 @@ import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+import arkanoid.Statics;
+import arkanoid.acciones.Juego;
+
 public class Bola extends JLabel implements ActionListener {
     Timer timerBola;
     public boolean flagEmpezar = false;
     public int vel = 4; // TODO cambiar a dooble aleatorio la velocidad y direccion
     int velocidady = -vel;
-    int velocidadx = 0;
-    boolean iniciarIzquierda = false;
-    boolean iniciarDerecha = false;
+    public int velocidadx = 0;
+    public boolean iniciarIzquierda = false;
+    public boolean iniciarDerecha = false;
     Juego p;
     ImageIcon imagen = new ImageIcon(Bola.class.getResource("/arkanoid/img/bola.png"));
     Image conversion = imagen.getImage();
@@ -24,7 +27,7 @@ public class Bola extends JLabel implements ActionListener {
     ImageIcon imgPre = new ImageIcon(tamaño);
 
     // Principal a;
-    Bola(Juego p) {
+    public Bola(Juego p) {
         timerBola = new Timer(15, this);
         timerBola.start();
         this.p = p;
